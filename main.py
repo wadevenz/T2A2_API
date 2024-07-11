@@ -14,6 +14,8 @@ def create_app():
 
     app.config["JWT_SECRET_KEY"] = os.environ.get("JWT_SECRET_KEY")
 
+# initialised the dependencies 
+
     db.init_app(app)
     ma.init_app(app)
     bcrypt.init_app(app)
