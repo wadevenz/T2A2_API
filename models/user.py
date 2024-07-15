@@ -8,3 +8,14 @@ class User(db.Model):
     email = db.Column(db.String, unique=True)
     password = db.Column(db.String)
     is_admin = db.Column(db.Boolean, default=False)
+
+
+class UserSchema(ma.Schema):
+    class Meta:
+        fields = ("id", "name", "email", "password", "country", "is_admin")
+
+user_schema = UserSchema(exclude=["password"])
+users_schema = UserSchema(many=True, exclude=["password"])
+
+
+
