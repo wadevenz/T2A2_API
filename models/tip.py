@@ -14,7 +14,7 @@ class Tip(db.Model):
     user = db.relationship ('User', back_populates = "tips")
     match = db.relationship ('Match', back_populates = "tips")
 
-class TipSchema():
+class TipSchema(ma.Schema):
 
     user = fields.Nested('UserSchema', only = ["name", "email"] )
     match = fields.List(fields.Nested('MatchSchema', only = ["id", "round", "time", "home_team", "away_team", "winner"]))
