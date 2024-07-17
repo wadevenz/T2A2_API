@@ -36,58 +36,76 @@ def seed_tables():
 
     teams = [
         Team(
-            name="Brisbane Lions"
+            name="Brisbane Lions",
+            stadium="Gabba"
         ),
          Team(
-            name="Gold Coast Suns"
+            name="Gold Coast Suns",
+            stadium="People First Stadium"
         ),
          Team(
-            name="Sydney Swans"
+            name="Sydney Swans",
+            stadium="SCG"
         ),
          Team(
-            name="GWS Giants"
+            name="GWS Giants",
+            stadium="Engie Stadium, Manuka Oval"
         ),
          Team(
-            name="Carlton Blues"
+            name="Carlton Blues",
+            stadium="Marvel Stadium"
         ),
          Team(
-            name="Geelong Cats"
+            name="Geelong Cats",
+            stadium="GMHBA Stadium"
         ),
          Team(
-            name="Fremantle Dockers"
+            name="Fremantle Dockers",
+            stadium="Optus Stadium"
         ),
          Team(
-            name="Essendon Bombers"
+            name="Essendon Bombers",
+            stadium="Marvel Stadium"
         ),
          Team(
-            name="Melbourne Demons"
+            name="Melbourne Demons",
+            stadium="MCG"
         ),
          Team(
-            name="Port Adelaide Power"
+            name="Port Adelaide Power",
+            stadium="Adelaide Oval"
         ),
          Team(
-            name="Western Bulldogs"
+            name="Western Bulldogs",
+            stadium="Marvel Stadium, Mars Stadium"
         ),
          Team(
-            name="Hawthorn Hawks"
+            name="Hawthorn Hawks",
+            stadium="MCG, UTAS Stadium"
         ),
          Team(
-            name="Adelaide Crows"
+            name="Adelaide Crows",
+            stadium="Adelaide Oval"
         ),
          Team(
-            name="Collingwood Magpies"
+            name="Collingwood Magpies",
+            stadium="MCG"
         ),
          Team(
-            name="St Kilda"
+            name="St Kilda",
+            stadium="Marvel Stadium"
         ),
          Team(
-            name="West Coast Eagles"
+            name="West Coast Eagles",
+            stadium="Optus Stadium"
         ),
          Team(
-            name="North Melbourne Kangaroos"
+            name="North Melbourne Kangaroos",
+            stadium="Marvel Stadium, Blundstone Arena"
         ),
          Team(
-            name="Richmond Tigers"
+            name="Richmond Tigers",
+            stadium="MCG"
         )
     ]
 
