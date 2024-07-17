@@ -2,6 +2,8 @@ from flask import Blueprint
 
 from init import db, bcrypt
 from models.user import User
+from models.team import Team
+
 
 db_commands = Blueprint("db", __name__)
 
@@ -30,8 +32,68 @@ def seed_tables():
             password=bcrypt.generate_password_hash("password123").decode("utf-8")
         )
     ]
-
     db.session.add_all(users)
+
+    teams = [
+        Team(
+            name="Brisbane Lions"
+        ),
+         Team(
+            name="Gold Coast Suns"
+        ),
+         Team(
+            name="Sydney Swans"
+        ),
+         Team(
+            name="GWS Giants"
+        ),
+         Team(
+            name="Carlton Blues"
+        ),
+         Team(
+            name="Geelong Cats"
+        ),
+         Team(
+            name="Fremantle Dockers"
+        ),
+         Team(
+            name="Essendon Bombers"
+        ),
+         Team(
+            name="Melbourne Demons"
+        ),
+         Team(
+            name="Port Adelaide Power"
+        ),
+         Team(
+            name="Western Bulldogs"
+        ),
+         Team(
+            name="Hawthorn Hawks"
+        ),
+         Team(
+            name="Adelaide Crows"
+        ),
+         Team(
+            name="Collingwood Magpies"
+        ),
+         Team(
+            name="St Kilda"
+        ),
+         Team(
+            name="West Coast Eagles"
+        ),
+         Team(
+            name="North Melbourne Kangaroos"
+        ),
+         Team(
+            name="Richmond Tigers"
+        )
+    ]
+
+    db.session.add_all(teams)
+
+
     db.session.commit()
 
     print("Tables seeded")
