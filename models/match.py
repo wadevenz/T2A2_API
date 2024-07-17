@@ -16,11 +16,9 @@ class Match(db.Model):
     home_team = db.Column(db.String, db.ForeignKey("teams.id"), nullable=False)
     away_team = db.Column(db.String, db.ForeignKey("teams.id"), nullable=False)
 
-    location = db.relationship('Location', back_populates = "match")
 
 class MatchSchema():
 
-    location = fields.Nested('LocationSchema')
 
     class Meta:
         fields = ("id", "round", "time", "winner", "location_id", "home_team", "away_team")
