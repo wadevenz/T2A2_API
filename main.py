@@ -27,5 +27,11 @@ def create_app():
     from controllers.auth_controller import auth_bp
     app.register_blueprint(auth_bp)
     
+    from controllers.team_controller import teams_bp
+    app.register_blueprint(teams_bp)
+    
+    # from controllers.tip_controller import tips_bp
+    # app.register_blueprint(tips_bp)
+
     return app
 
