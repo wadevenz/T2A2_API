@@ -10,8 +10,6 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
-    tips = db.relationship("Tip", back_populates="user")
-
 class UserSchema(ma.Schema):
 
     tips = fields.List(fields.Nested("TipSchema", exclude=["user"]))
