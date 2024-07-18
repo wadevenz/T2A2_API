@@ -119,92 +119,87 @@ def seed_tables():
         Location(
             city="Brisbane, Queensland",
             stadium="Gabba",
-            timezone=ZoneInfo("Queensland/Australia")
+            # timezone=datetime(2024, tzinfo=ZoneInfo("Australia/Queensland"))
         ),
           Location(
             city="Gold Coast, Queensland",
             stadium="People First Stadium",
-            timezone=ZoneInfo("Queensland/Australia")
+            # timezone=ZoneInfo("Australia/Queensland")
         ),
           Location(
             city="Mount Barker, South Australia",
             stadium="Adelaide Hills",
-            timezone=ZoneInfo("South/Australia")
+            # timezone=ZoneInfo("Australia/South")
         ),
           Location(
             city="Adelaide, South Australia",
             stadium="Adelaide Oval",
-            timezone=ZoneInfo("South/Australia")
+            # timezone=ZoneInfo("Australia/South")
         ),
           Location(
             city="Hobart, Tasmaina",
             stadium="Blundstone Arena",
-            timezone=ZoneInfo("Tasmania/Australia")
-        ),
-          Location(
-            city="Brisbane",
-            stadium="Gabba",
-            timezone=ZoneInfo("Queensland/Australia")
+            # timezone=ZoneInfo("Australia/Tasmania")
         ),
           Location(
             city="Sydney, New South Wales",
             stadium="ENGIE Stadium",
-            timezone=ZoneInfo("Sydney/Australia")
+            # timezone=ZoneInfo("Australia/Sydney")
         ),
           Location(
             city="Geelong, Victoria",
             stadium="GMHBA Stadium",
-            timezone=ZoneInfo("Melbourne/Australia")
+            # timezone=ZoneInfo("Australia/Melbourne")
         ),
           Location(
             city="Canberra, Australian Capital Territory",
             stadium="Manuka Oval",
-            timezone=ZoneInfo("Sydney/Australia")
+            # timezone=ZoneInfo("Australia/Sydney")
         ),
           Location(
             city="Ballarat, Victoria",
             stadium="Mars Stadium",
-            timezone=ZoneInfo("Victoria/Australia")
+            # timezone=ZoneInfo("Australia/Victoria")
         ),
           Location(
             city="Melbourne, Victoria",
             stadium="Marvel Stadium",
-            timezone=ZoneInfo("Melbourne/Australia")
+            # timezone=ZoneInfo("Australia/Melbourne")
         ),
           Location(
             city="Melbourne, Victoria",
             stadium="MCG",
-            timezone=ZoneInfo("Melbourne/Australia")
+            # timezone=ZoneInfo("Australia/Melbourne")
         ),
           Location(
             city="Norwood, South Australia",
             stadium="Norwood Oval",
-            timezone=ZoneInfo("South/Australia")
+            # timezone=ZoneInfo("Australia/South")
         ),
           Location(
             city="Perth, Australia",
             stadium="Optus Stadium",
-            timezone=ZoneInfo("Perth/Australia")
+            # timezone=ZoneInfo("Australia/Perth")
         ),
           Location(
             city="Sydney, New South Wales",
             stadium="SCG",
-            timezone=ZoneInfo("Sydney/Australia")
+            # timezone=ZoneInfo("Australia/Sydney")
         ),
           Location(
             city="Darwin, Northern Territory",
             stadium="TIO Stadium",
-            timezone=ZoneInfo("North/Australia")
+            # timezone=ZoneInfo("Australia/North")
         ),
           Location(
             city="Alice Springs, Northern Territory",
             stadium="TIO Traeger Park",
-            timezone=ZoneInfo("North/Australia")
+            # timezone=ZoneInfo("Australia/North")
         ),
           Location(
             city="Launceston, Tasmania",
             stadium="UTAS Stadium",
-            timezone=ZoneInfo("Tasmania/Australia")
+            # timezone=ZoneInfo("Australia/Tasmania")
         ),
     ]
     db.session.add_all(locations)
