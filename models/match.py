@@ -22,6 +22,7 @@ class Match(db.Model):
     locations = db.relationship("Location", back_populates="matches")
     home_team = db.relationship("Team", foreign_keys=[home_team_id])
     away_team = db.relationship("Team", foreign_keys=[away_team_id])
+    
     tips = db.relationship("Tip", back_populates="matches")
 
 class MatchSchema(ma.Schema):
