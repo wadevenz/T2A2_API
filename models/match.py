@@ -15,15 +15,19 @@ class Match(db.Model):
     time = db.Column(db.Date)
     winner = db.Column(db.String)
     
-    location_id = db.Column(db.String, db.ForeignKey("location.id", nullable=False))
-    home_team = db.Column(db.String, db.ForeignKey("teams.id"), nullable=False)
-    away_team = db.Column(db.String, db.ForeignKey("teams.id"), nullable=False)
+    location_id = db.Column(db.Integer, db.ForeignKey("locations.id"), nullable=False)
+    home_team = db.Column(db.Integer, db.ForeignKey("teams.id"), nullable=False)
+    away_team = db.Column(db.Integer, db.ForeignKey("teams.id"), nullable=False)
 
     locations = db.relationship("Location", back_populates="matches")
+    home_team = db.relationship("Team", back_populates="matches")
+    away_team = db.relationship("Team", back_populates="matches")
 
 class MatchSchema(ma.Schema):
 
-    locations = fields.Nested('LocationSchema', only=["stadium"])
+    locations = fields.Nested('LocationSchema')
+    home_team = fields.Nested('TeamSchema', only=["name"])
+    away_team = fields.Nested('TeamSchema', only=["name"])
 
     # winner = fields.String(validate=OneOf(VALID_WINNER))
 
