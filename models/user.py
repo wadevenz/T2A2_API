@@ -10,9 +10,10 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
+    tips = db.relationship("Tip", back_populates="users")
 class UserSchema(ma.Schema):
     class Meta:
-        fields = ("id", "name", "email", "password", "is_admin")
+        fields = ("id", "name", "email", "password", "is_admin", "tips")
 
 user_schema = UserSchema(exclude=["password"])
 users_schema = UserSchema(many=True, exclude=["password"])

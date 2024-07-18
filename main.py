@@ -30,8 +30,8 @@ def create_app():
     from controllers.team_controller import teams_bp
     app.register_blueprint(teams_bp)
     
-    # from controllers.tip_controller import tips_bp
-    # app.register_blueprint(tips_bp)
+    from controllers.tip_controller import tips_bp
+    app.register_blueprint(tips_bp)
 
     return app
 
