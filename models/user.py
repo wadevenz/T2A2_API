@@ -10,8 +10,15 @@ class User(db.Model):
     password = db.Column(db.String, nullable=False)
     is_admin = db.Column(db.Boolean, default=False)
 
-    tips = db.relationship("Tip", back_populates="users")
 class UserSchema(ma.Schema):
+
+    tips = fields.List(fields.Nested("TipSchema", exclude=["user"]))
+
+    # email = fields.String(required=True, validate=Regexp("^\S+@\S+\.\S+$", error="Invalid Email Format"))
+
+    # password = fields.String(required=True, validate=Regexp("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", error="Minimum eight characters, at least one letter and one number"))
+
+
     class Meta:
         fields = ("id", "name", "email", "password", "is_admin", "tips")
 

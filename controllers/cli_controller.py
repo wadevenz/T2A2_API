@@ -1,8 +1,12 @@
+from zoneinfo import ZoneInfo
+from datetime import datetime, timedelta
+
 from flask import Blueprint
 
 from init import db, bcrypt
 from models.user import User
 from models.team import Team
+from models.location import Location
 
 
 db_commands = Blueprint("db", __name__)
@@ -111,6 +115,94 @@ def seed_tables():
 
     db.session.add_all(teams)
 
+    locations = [
+        Location(
+            city="Brisbane, Queensland",
+            stadium="Gabba",
+            # timezone=datetime(2024, tzinfo=ZoneInfo("Australia/Queensland"))
+        ),
+          Location(
+            city="Gold Coast, Queensland",
+            stadium="People First Stadium",
+            # timezone=ZoneInfo("Australia/Queensland")
+        ),
+          Location(
+            city="Mount Barker, South Australia",
+            stadium="Adelaide Hills",
+            # timezone=ZoneInfo("Australia/South")
+        ),
+          Location(
+            city="Adelaide, South Australia",
+            stadium="Adelaide Oval",
+            # timezone=ZoneInfo("Australia/South")
+        ),
+          Location(
+            city="Hobart, Tasmaina",
+            stadium="Blundstone Arena",
+            # timezone=ZoneInfo("Australia/Tasmania")
+        ),
+          Location(
+            city="Sydney, New South Wales",
+            stadium="ENGIE Stadium",
+            # timezone=ZoneInfo("Australia/Sydney")
+        ),
+          Location(
+            city="Geelong, Victoria",
+            stadium="GMHBA Stadium",
+            # timezone=ZoneInfo("Australia/Melbourne")
+        ),
+          Location(
+            city="Canberra, Australian Capital Territory",
+            stadium="Manuka Oval",
+            # timezone=ZoneInfo("Australia/Sydney")
+        ),
+          Location(
+            city="Ballarat, Victoria",
+            stadium="Mars Stadium",
+            # timezone=ZoneInfo("Australia/Victoria")
+        ),
+          Location(
+            city="Melbourne, Victoria",
+            stadium="Marvel Stadium",
+            # timezone=ZoneInfo("Australia/Melbourne")
+        ),
+          Location(
+            city="Melbourne, Victoria",
+            stadium="MCG",
+            # timezone=ZoneInfo("Australia/Melbourne")
+        ),
+          Location(
+            city="Norwood, South Australia",
+            stadium="Norwood Oval",
+            # timezone=ZoneInfo("Australia/South")
+        ),
+          Location(
+            city="Perth, Australia",
+            stadium="Optus Stadium",
+            # timezone=ZoneInfo("Australia/Perth")
+        ),
+          Location(
+            city="Sydney, New South Wales",
+            stadium="SCG",
+            # timezone=ZoneInfo("Australia/Sydney")
+        ),
+          Location(
+            city="Darwin, Northern Territory",
+            stadium="TIO Stadium",
+            # timezone=ZoneInfo("Australia/North")
+        ),
+          Location(
+            city="Alice Springs, Northern Territory",
+            stadium="TIO Traeger Park",
+            # timezone=ZoneInfo("Australia/North")
+        ),
+          Location(
+            city="Launceston, Tasmania",
+            stadium="UTAS Stadium",
+            # timezone=ZoneInfo("Australia/Tasmania")
+        ),
+    ]
+    db.session.add_all(locations)
 
     db.session.commit()
 

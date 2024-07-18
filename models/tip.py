@@ -1,13 +1,9 @@
 from init import db, ma
 
-from marshmallow import fields
-from marshmallow.validate import Length, And, Regexp, OneOf
-from marshmallow.exceptions import ValidationError
+# from marshmallow import fields
 
-VALID_SELECTION = ( "Home", "Away", "Draw" )
-
-class Tip(db.Model):
-    __tablename__ = "tips"
+# class Tip(db.Model):
+#     __tablename__ = "tips"
 
     id = db.Column(db.Integer, primary_key=True)
     selection = db.Column(db.String)
@@ -23,10 +19,8 @@ class TipSchema(ma.Schema):
     user = fields.Nested('UserSchema', only = ["name", "email"] )
     # match = fields.List(fields.Nested('MatchSchema', only = ["id", "round", "time", "home_team", "away_team", "winner"]))
 
-    selection = fields.String(validate=OneOf(VALID_SELECTION))
-    
-    class Meta:
-        fields = ("id", "selection", "user")
+#     class Meta:
+#         fields = ("id", "selection", "user", "match")
 
 tip_schema = TipSchema()
 tips_schema = TipSchema(many=True)
