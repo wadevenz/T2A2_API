@@ -14,7 +14,7 @@ class User(db.Model):
 
 class UserSchema(ma.Schema):
 
-    tips = fields.List(fields.Nested("TipSchema", exclude=["user"]))
+    tips = fields.List(fields.Nested("TipSchema", exclude=["users"]))
 
     # email = fields.String(required=True, validate=Regexp("^\S+@\S+\.\S+$", error="Invalid Email Format"))
 

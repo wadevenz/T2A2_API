@@ -6,7 +6,7 @@ from psycopg2 import errorcodes
 from flask_jwt_extended import create_access_token, jwt_required, get_jwt_identity
 
 from init import bcrypt, db
-from models.user import User, user_schema
+from models.user import User, user_schema, users_schema
 
 
 auth_bp = Blueprint("auth", __name__, url_prefix="/auth")
@@ -52,3 +52,9 @@ def login_user():
     
     else:
         return {"error": "Invalid email or password"}, 401
+    
+@auth_bp.route("/users")
+def get_users():
+    stmt = db.select(User)
+    users = db.session.scalars(stmt)
+    return users_schema.dump(users)

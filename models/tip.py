@@ -18,11 +18,11 @@ class Tip(db.Model):
 
 class TipSchema(ma.Schema):
 
-    users = fields.Nested('UserSchema', only = ["name", "email"] )
-    matches = fields.List(fields.Nested('MatchSchema', only = ["round", "winner"]))
+    users = fields.Nested('UserSchema', only = ["name"] )
+    matches = fields.Nested('MatchSchema', only = ["round", "winner", "home_team", "away_team"])
 
     class Meta:
-        fields = ("id", "selection", "user", "matches")
+        fields = ("id", "selection", "users", "matches")
 
 tip_schema = TipSchema()
 tips_schema = TipSchema(many=True)

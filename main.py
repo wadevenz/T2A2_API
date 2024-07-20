@@ -32,9 +32,12 @@ def create_app():
 
     from controllers.match_controller import match_bp
     app.register_blueprint(match_bp)
+
+    from controllers.location_controller import location_bp
+    app.register_blueprint(location_bp)
     
-    # from controllers.tip_controller import tips_bp
-    # app.register_blueprint(tips_bp)
+    from controllers.tip_controller import tips_bp
+    app.register_blueprint(tips_bp)
 
     return app
 
