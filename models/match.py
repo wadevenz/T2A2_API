@@ -5,7 +5,7 @@ from marshmallow.validate import OneOf
 from init import db, ma
 
 
-# VALID_WINNER = ("Home", "Away", "Draw", "Upcoming", "Live")
+VALID_WINNER = ("Home", "Away", "Draw", "Upcoming", "Live")
 
 class Match(db.Model):
     __tablename__ = "matches"
@@ -27,11 +27,11 @@ class Match(db.Model):
 
 class MatchSchema(ma.Schema):
 
-    locations = fields.Nested('LocationSchema', exclude=["id", "matches"])
+    locations = fields.Nested('LocationSchema', exclude=["id"])
     home_team = fields.Nested('TeamSchema', only=["name"])
     away_team = fields.Nested('TeamSchema', only=["name"])
 
-    # winner = fields.String(validate=OneOf(VALID_WINNER))
+    winner = fields.String(required=True, validate=OneOf(VALID_WINNER), error="Winner must contain a valid input")
 
     # @validates("winner")
     # def validate_status(self, value):

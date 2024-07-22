@@ -23,7 +23,7 @@ def get_team(teams_id):
     
 @teams_bp.route("/", methods=["POST"])
 def create_team():
-    body_data = request.get_json()
+    body_data = team_schema.load(request.get_json())
     
     team = Team(
             name=body_data.get("name"),
@@ -38,7 +38,7 @@ def create_team():
 
 @teams_bp.route("/<int:teams_id>", methods=["PUT", "PATCH"])
 def update_team(teams_id):
-    body_data = request.get_json()
+    body_data = team_schema.load(request.get_json())
     stmt = db.select(Team).filter_by(id=teams_id)
     team = db.session.scalar(stmt)
 

@@ -30,11 +30,11 @@ def get_match(match_id):
 @match_bp.route("/", methods=["POST"])
 @jwt_required()
 def create_match():
-    body_data = request.get_json()
+    body_data = match_schema.load(request.get_json())
     
     match = Match(
         round=body_data.get("round"),
-        # time=body_data.get(datetime("time")),
+        time=body_data.get(datetime("time")),
         winner=body_data.get("winner"),
         location_id=body_data.get("location_id"),
         home_team_id=body_data.get("home_team_id"),
@@ -49,7 +49,7 @@ def create_match():
 @match_bp.route ("/<int:match_id>", methods=["PATCH", "PUT"])
 @jwt_required()
 def update_match(match_id):
-    body_data=request.get_json()
+    body_data=match_schema.load(request.get_json(), partial=True)
     stmt = db.select(Match).filter_by(id=match_id)
     match= db.session.scalar(stmt)
 
