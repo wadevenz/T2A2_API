@@ -15,10 +15,10 @@ class Location(db.Model):
 
 class LocationSchema(ma.Schema):
 
-    matches = fields.List(fields.Nested('MatchSchema', only=["round", "time", "winner"]))
+    # matches = fields.List(fields.Nested('MatchSchema', only=["round", "time", "winner"]))
 
     class Meta:
-        fields = ("id", "city", "stadium", "timezone", "matches")
+        fields = ("id", "city", "stadium", "timezone")
         ordered = True
 
 location_schema = LocationSchema()

@@ -69,9 +69,6 @@ def update_match(match_id):
         return {"error": f"Match with id '{match_id}' does not exist"}, 404
 
 
-
-
-
 @match_bp.route("/<int:match_id>", methods=["DELETE"])
 @jwt_required()
 def delete_card(match_id):
