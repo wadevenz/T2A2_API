@@ -19,6 +19,7 @@ class LocationSchema(ma.Schema):
 
     class Meta:
         fields = ("id", "city", "stadium", "timezone", "matches")
+        ordered = True
 
 location_schema = LocationSchema()
 locations_schema = LocationSchema(many=True)

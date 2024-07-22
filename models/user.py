@@ -14,7 +14,7 @@ class User(db.Model):
 
 class UserSchema(ma.Schema):
 
-    tips = fields.List(fields.Nested("TipSchema", exclude=["users"]))
+    tips = fields.List(fields.Nested("TipSchema", exclude=["users"], cascade="all, delete"))
 
     # email = fields.String(required=True, validate=Regexp("^\S+@\S+\.\S+$", error="Invalid Email Format"))
 
@@ -23,6 +23,7 @@ class UserSchema(ma.Schema):
 
     class Meta:
         fields = ("id", "name", "email", "password", "is_admin", "tips")
+        ordered = True
 
 user_schema = UserSchema(exclude=["password"])
 users_schema = UserSchema(many=True, exclude=["password"])

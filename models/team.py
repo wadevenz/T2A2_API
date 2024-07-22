@@ -18,6 +18,7 @@ class TeamSchema(ma.Schema):
 
     class Meta:
         fields = ("id", "name", "stadium", "matches")
+        ordered = True
 
 team_schema = TeamSchema()
 teams_schema = TeamSchema(many=True)

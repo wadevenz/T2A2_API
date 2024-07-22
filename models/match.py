@@ -39,7 +39,7 @@ class MatchSchema(ma.Schema):
             
     class Meta:
         fields = ("id", "round", "time", "winner", "locations", "home_team", "away_team")
-
+        ordered = True
 
 match_schema = MatchSchema()
 matches_schema = MatchSchema(many=True)

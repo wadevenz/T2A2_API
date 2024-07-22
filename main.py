@@ -9,6 +9,7 @@ from init import db, ma, bcrypt, jwt
 def create_app():
     app = Flask(__name__)
 
+    app.json.sort_keys = False
 # utilised a os environement to protect sensitive info in .env file
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get("DATABASE_URL")
 
