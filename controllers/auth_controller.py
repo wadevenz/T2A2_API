@@ -58,3 +58,25 @@ def get_users():
     stmt = db.select(User)
     users = db.session.scalars(stmt)
     return users_schema.dump(users)
+
+@auth_bp.route("/users/<int:users_id>", methods=["DELETE"])
+def delete_user(users_id):
+    stmt = db.select(User).filter_by(id=users_id)
+    user = db.session.scalar(stmt)
+
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        return {"message": f"User with id '{users_id}' has been deleted"}
+    else:
+        return {"error": f"User with id '{users_id}' does not exist"}
+
+# @auth_bp.route("/users/<int:users_id>", methods=["PUT", "PATCH"])
+# def update_user(users_id):
+#     body_data = request.get_json()
+#     stmt = db.select(User).filter_by(id=users_id)
+#     user = db.session.scalar(stmt)
+
+#     if user:
+
+#         user.name
