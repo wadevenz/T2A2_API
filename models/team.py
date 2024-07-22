@@ -14,7 +14,7 @@ class Team(db.Model):
 
 class TeamSchema(ma.Schema):
 
-    # matches = fields.List(fields.Nested('MatchSchema', exclude=["teams"]))
+    matches = fields.List(fields.Nested('MatchSchema', exclude=["teams"]))
 
     class Meta:
         fields = ("id", "name", "stadium")
