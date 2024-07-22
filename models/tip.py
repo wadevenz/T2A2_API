@@ -1,8 +1,9 @@
 from init import db, ma
 
 from marshmallow import fields, validates
+from marshmallow.validate import OneOf
 
-VALID_SELECTION = ( "home", "away" )
+VALID_SELECTION = ("Home", "Away")
 
 class Tip(db.Model):
     __tablename__ = "tips"
@@ -20,6 +21,8 @@ class TipSchema(ma.Schema):
 
     users = fields.Nested('UserSchema', only = ["name"] )
     matches = fields.Nested('MatchSchema', only = ["id", "round", "winner", "home_team", "away_team"])
+
+    selection = fields.String(validate=OneOf(VALID_SELECTION))
 
     class Meta:
         fields = ("id", "selection", "users", "matches")

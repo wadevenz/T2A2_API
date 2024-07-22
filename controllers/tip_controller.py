@@ -25,7 +25,7 @@ def get_one_tip(tip_id):
 @tips_bp.route("/", methods=["POST"])
 @jwt_required()
 def create_tip():
-    body_data = request.get_json()
+    body_data = tip_schema.load(request.get_json())
     
     tip = Tip(
         selection=body_data.get("selection"),
@@ -70,7 +70,7 @@ def delete_tip(tip_id):
 @tips_bp.route("/<int:tip_id>", methods=["PUT", "PATCH"])
 @jwt_required()
 def update_tip(tip_id):
-    body_data = request.get_json()
+    body_data = tip_schema.load(request.get_json())
     stmt = db.select(Tip).filter_by(id=tip_id)
     tip = db.session.scalar(stmt)
     if tip:

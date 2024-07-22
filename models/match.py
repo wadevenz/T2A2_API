@@ -38,7 +38,7 @@ class MatchSchema(ma.Schema):
     #    pass
             
     class Meta:
-        fields = ("id", "round", "time", "winner", "locations", "home_team", "away_team")
+        fields = ("id", "round", "time", "locations", "home_team", "away_team", "winner")
         ordered = True
 
 match_schema = MatchSchema()
