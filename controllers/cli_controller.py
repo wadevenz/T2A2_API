@@ -121,7 +121,7 @@ def seed_tables():
         Location(
             city="Brisbane, Queensland",
             stadium="Gabba",
-            # timezone=datetime(2024, tzinfo=ZoneInfo("Australia/Queensland"))
+            # timezone=datetime(2024, 12, 25, tzinfo=ZoneInfo("Australia/Queensland"))
         ),
           Location(
             city="Gold Coast, Queensland",
