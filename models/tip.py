@@ -24,8 +24,11 @@ class TipSchema(ma.Schema):
 
     selection = fields.String(validate=OneOf(VALID_SELECTION))
 
+    user_id = fields.Integer(load_only=True)
+    match_id = fields.Integer(load_only=True)
+
     class Meta:
-        fields = ("id", "selection", "users", "matches")
+        fields = ("id", "selection", "users", "matches", "user_id", "match_id")
         ordered = True
 
 tip_schema = TipSchema()

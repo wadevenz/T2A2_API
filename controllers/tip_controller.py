@@ -4,16 +4,19 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from init import db
 from models.tip import Tip, tip_schema, tips_schema
 from models.match import Match
+from models.user import User
 
 tips_bp = Blueprint("tips", __name__, url_prefix="/tips")
 
 @tips_bp.route("/")
+@jwt_required()
 def get_all_tips():
     stmt = db.select(Tip)
     tips = db.session.scalars(stmt)
     return tips_schema.dump(tips)
 
 @tips_bp.route("/<int:tip_id>")
+@jwt_required()
 def get_one_tip(tip_id):
     stmt = db.select(Tip).filter_by(id=tip_id)
     tip = db.session.scalar(stmt)
@@ -51,6 +54,9 @@ def delete_tip(tip_id):
     tip = db.session.scalar(stmt)
 
     if tip:
+        if str(tip.user_id) != get_jwt_identity():
+            return {"error": "You did not make this selection"}, 403
+        
         db.session.delete(tip)
         db.session.commit()
         return {"message": f"Tip deleted"}
@@ -76,7 +82,7 @@ def update_tip(tip_id):
     if tip:
         
         if str(tip.user_id) != get_jwt_identity():
-            return {"error": "You did not make this tip"}, 403
+            return {"error": "You did not make this selection"}, 403
         
         tip.selection = body_data.get("selection") or tip.selection
         tip.user_id = get_jwt_identity()

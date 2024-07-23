@@ -12,7 +12,7 @@ class Match(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     round = db.Column(db.String)
-    time = db.Column(db.Date)
+    time = db.Column(db.DateTime)
     winner = db.Column(db.String)
     
     location_id = db.Column(db.Integer, db.ForeignKey("locations.id"), nullable=False)
