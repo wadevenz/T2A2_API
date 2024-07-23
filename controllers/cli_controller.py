@@ -1,5 +1,5 @@
-from zoneinfo import ZoneInfo
-from datetime import date, datetime
+import pytz
+from datetime import datetime
 
 from flask import Blueprint
 
@@ -9,6 +9,7 @@ from models.team import Team
 from models.location import Location
 from models.match import Match
 from models.tip import Tip
+from utils import convert_to_string
 
 
 db_commands = Blueprint("db", __name__)
@@ -121,87 +122,87 @@ def seed_tables():
         Location(
             city="Brisbane, Queensland",
             stadium="Gabba",
-            # timezone=datetime(2024, 12, 25, tzinfo=ZoneInfo("Australia/Queensland"))
+            timezone=str(pytz.timezone("Australia/Queensland"))
         ),
           Location(
             city="Gold Coast, Queensland",
             stadium="People First Stadium",
-            # timezone=ZoneInfo("Australia/Queensland")
+            timezone=str(pytz.timezone("Australia/Queensland"))
         ),
           Location(
             city="Mount Barker, South Australia",
             stadium="Adelaide Hills",
-            # timezone=ZoneInfo("Australia/South")
+            timezone=str(pytz.timezone("Australia/South"))
         ),
           Location(
             city="Adelaide, South Australia",
             stadium="Adelaide Oval",
-            # timezone=ZoneInfo("Australia/South")
+            timezone=str(pytz.timezone("Australia/South"))
         ),
           Location(
             city="Hobart, Tasmaina",
             stadium="Blundstone Arena",
-            # timezone=ZoneInfo("Australia/Tasmania")
+            timezone=str(pytz.timezone("Australia/Tasmania"))
         ),
           Location(
             city="Sydney, New South Wales",
             stadium="ENGIE Stadium",
-            # timezone=ZoneInfo("Australia/Sydney")
+            timezone=str(pytz.timezone("Australia/Sydney"))
         ),
           Location(
             city="Geelong, Victoria",
             stadium="GMHBA Stadium",
-            # timezone=ZoneInfo("Australia/Melbourne")
+            timezone=str(pytz.timezone("Australia/Melbourne"))
         ),
           Location(
             city="Canberra, Australian Capital Territory",
             stadium="Manuka Oval",
-            # timezone=ZoneInfo("Australia/Sydney")
+            timezone=str(pytz.timezone("Australia/Sydney"))
         ),
           Location(
             city="Ballarat, Victoria",
             stadium="Mars Stadium",
-            # timezone=ZoneInfo("Australia/Victoria")
+            timezone=str(pytz.timezone("Australia/Victoria"))
         ),
           Location(
             city="Melbourne, Victoria",
             stadium="Marvel Stadium",
-            # timezone=ZoneInfo("Australia/Melbourne")
+            timezone=str(pytz.timezone("Australia/Melbourne"))
         ),
           Location(
             city="Melbourne, Victoria",
             stadium="MCG",
-            # timezone=ZoneInfo("Australia/Melbourne")
+            timezone=str(pytz.timezone("Australia/Melbourne"))
         ),
           Location(
             city="Norwood, South Australia",
             stadium="Norwood Oval",
-            # timezone=ZoneInfo("Australia/South")
+            timezone=str(pytz.timezone("Australia/South"))
         ),
           Location(
             city="Perth, Australia",
             stadium="Optus Stadium",
-            # timezone=ZoneInfo("Australia/Perth")
+            timezone=str(pytz.timezone("Australia/Perth"))
         ),
           Location(
             city="Sydney, New South Wales",
             stadium="SCG",
-            # timezone=ZoneInfo("Australia/Sydney")
+            timezone=str(pytz.timezone("Australia/Sydney"))
         ),
           Location(
             city="Darwin, Northern Territory",
             stadium="TIO Stadium",
-            # timezone=ZoneInfo("Australia/North")
+            timezone=str(pytz.timezone("Australia/North"))
         ),
           Location(
             city="Alice Springs, Northern Territory",
             stadium="TIO Traeger Park",
-            # timezone=ZoneInfo("Australia/North")
+            timezone=str(pytz.timezone("Australia/North"))
         ),
           Location(
             city="Launceston, Tasmania",
             stadium="UTAS Stadium",
-            # timezone=ZoneInfo("Australia/Tasmania")
+            timezone=str(pytz.timezone("Australia/Tasmania"))
         ),
     ]
     db.session.add_all(locations)

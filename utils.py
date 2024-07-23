@@ -28,3 +28,5 @@ def auth_as_admin_decorator(fn):
 
     return wrapper
 
+def convert_to_string(timezone):
+    return str(timezone)

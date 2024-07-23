@@ -6,18 +6,17 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 
 from init import db
 from models.location import Location, location_schema, locations_schema
+from utils import auth_as_admin_decorator
 
 location_bp = Blueprint("locations", __name__, url_prefix="/locations")
 
 @location_bp.route("/")
-@jwt_required()
 def get_all_locations():
     stmt = db.select(Location)
     locations = db.session.scalars(stmt)
     return locations_schema.dump(locations)
 
 @location_bp.route("/<int:locations_id>")
-@jwt_required()
 def get_location(locations_id):
     stmt = db.select(Location).filter_by(id=locations_id)
     location = db.session.scalar(stmt)
@@ -30,6 +29,8 @@ def get_location(locations_id):
     
 
 @location_bp.route("/", methods=["POST"])
+@jwt_required()
+@auth_as_admin_decorator
 def create_location():
     body_data = request.get_json()
 
@@ -45,6 +46,8 @@ def create_location():
     return location_schema.dump(location)
 
 @location_bp.route("/<int:locations_id>", methods=["DELETE"])
+@jwt_required()
+@auth_as_admin_decorator
 def delete_location(locations_id):
     stmt = db.select(Location).filter_by(id=locations_id)
     location = db.session.scalar(stmt)
@@ -58,6 +61,8 @@ def delete_location(locations_id):
     
 
 @location_bp.route("/<int:locations_id>", methods=["PUT", "PATCH"])
+@jwt_required()
+@auth_as_admin_decorator
 def update_location(locations_id):
     body_data = request.get_json()
     stmt = db.select(Location).filter_by(id=locations_id)

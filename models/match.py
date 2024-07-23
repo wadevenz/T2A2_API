@@ -1,5 +1,5 @@
 
-from marshmallow import fields, validates
+from marshmallow import fields
 from marshmallow.validate import OneOf
 
 from init import db, ma

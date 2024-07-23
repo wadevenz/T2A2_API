@@ -83,7 +83,7 @@ def update_match(match_id):
 
 @match_bp.route("/<int:match_id>", methods=["DELETE"])
 @jwt_required()
-def delete_card(match_id):
+def delete_match(match_id):
     is_admin = authorise_as_admin()
 
     if not is_admin:

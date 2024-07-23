@@ -1,7 +1,9 @@
 from flask import Blueprint, request
+from flask_jwt_extended import jwt_required
 
 from init import db
 from models.team import Team, team_schema, teams_schema
+from utils import auth_as_admin_decorator
 
 teams_bp = Blueprint ("teams", __name__, url_prefix="/teams")
 
@@ -22,6 +24,8 @@ def get_team(teams_id):
         return {"error": f"Team with id '{teams_id}' does not exist"}, 404
     
 @teams_bp.route("/", methods=["POST"])
+@jwt_required()
+@auth_as_admin_decorator
 def create_team():
     body_data = team_schema.load(request.get_json())
     
@@ -37,6 +41,8 @@ def create_team():
     
 
 @teams_bp.route("/<int:teams_id>", methods=["PUT", "PATCH"])
+@jwt_required()
+@auth_as_admin_decorator
 def update_team(teams_id):
     body_data = team_schema.load(request.get_json())
     stmt = db.select(Team).filter_by(id=teams_id)
@@ -56,6 +62,8 @@ def update_team(teams_id):
     
 
 @teams_bp.route("/<int:teams_id>", methods=["DELETE"])
+@jwt_required()
+@auth_as_admin_decorator
 def delete_team(teams_id):
     stmt = db.select(Team).filter_by(id=teams_id)
     team = db.session.scalar(stmt)

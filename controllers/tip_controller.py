@@ -63,15 +63,6 @@ def delete_tip(tip_id):
     else:
         return {"error": f"Tip with id '{tip_id}' does not exist"}, 404
     
-# @tips_bp.route("/", methods=["DELETE"])
-# @jwt_required()
-# def delete_all_tips():
-#     stmt = db.select(Tip)
-#     tips = db.session.scalars(stmt)
-#     db.session.delete(tips)
-#     db.session.commit()
-#     return {"message": "All tips deleted"}
-
 
 @tips_bp.route("/<int:tip_id>", methods=["PUT", "PATCH"])
 @jwt_required()
@@ -100,3 +91,20 @@ def update_tip(tip_id):
     
     else:
         return {"error": f"The tip with id '{tip_id} does  not exist"}, 404
+    
+# @tips_bp.route("/", methods=["DELETE"])
+# @jwt_required()
+# def delete_all_tips():
+#     current_user = get_jwt_identity
+#     stmt = db.select(Tip).filter_by(tips.user_id==current_user)
+#     tips = db.session.scalars(stmt)
+    
+#     if not tips:
+#         {"error": "No tips belonging to user"}
+
+#     else:
+#         db.session.delete(tips)
+#         db.session.commit()
+#         return {"message": f"All tips belonging to user id '{tips.users_id} have been deleted"}
+    
+        
