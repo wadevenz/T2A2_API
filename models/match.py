@@ -31,14 +31,16 @@ class MatchSchema(ma.Schema):
     home_team = fields.Nested('TeamSchema', only=["name"])
     away_team = fields.Nested('TeamSchema', only=["name"])
 
+    home_team_id = fields.Integer(load_only=True)
+    away_team_id = fields.Integer(load_only=True)
+    location_id = fields.Integer(load_only=True)
+
     winner = fields.String(required=True, validate=OneOf(VALID_WINNER), error="Winner must contain a valid input")
 
-    # @validates("winner")
-    # def validate_status(self, value):
-    #    pass
-            
+    time = fields.DateTime(format='%Y-%m-%d %H:%M', required=True)
+
     class Meta:
-        fields = ("id", "round", "time", "locations", "home_team", "away_team", "winner")
+        fields = ("id", "round", "time", "locations", "home_team", "away_team", "winner", "location_id", "home_team_id", "away_team_id")
         ordered = True
 
 match_schema = MatchSchema()

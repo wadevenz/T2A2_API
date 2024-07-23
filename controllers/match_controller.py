@@ -34,7 +34,7 @@ def create_match():
     
     match = Match(
         round=body_data.get("round"),
-        time=body_data.get(datetime("time")),
+        time=body_data.get("time"),
         winner=body_data.get("winner"),
         location_id=body_data.get("location_id"),
         home_team_id=body_data.get("home_team_id"),
