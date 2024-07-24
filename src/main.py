@@ -29,6 +29,7 @@ def create_app():
     def validation_error(err):
         return {"error": err.messages}, 400
     
+# importing and registering controller blueprints
 
     from controllers.cli_controller import db_commands
     app.register_blueprint(db_commands)
