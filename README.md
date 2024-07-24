@@ -50,14 +50,40 @@ Barrett, S, 2018, Is footy tipping the missing link for a great company culture?
 
 [Trello](https://trello.com/b/vHCD0owm/t2a2api)
 
-
 ### R3 List and explain the third-party services, packages and dependencies used in this app.
+
+Flask
+
+PostgreSQL
+
+SQLAlchemy
+
+Psycopg2
+
+Bcrypt
+
+Marshmallow
+
+JWT Extended
+
+dotenv
+
+datetime
+
+pytz
 
 ### R4 Explain the benefits and drawbacks of this app’s underlying database system.
 
+PostgreSQL
+
 ### R5 Explain the features, purpose and functionalities of the object-relational mapping system (ORM) used in this app.
 
+SQLALChemy
+
 ### R6 Design an entity relationship diagram (ERD) for this app’s database, and explain how the relations between the diagrammed models will aid the database design. This should focus on the database design BEFORE coding has begun, eg. during the project planning or design phase.
+
+![ERD](/docs/T2A2_ERD.png)
+
 
 ### R7 Explain the implemented models and their relationships, including how the relationships aid the database implementation.This should focus on the database implementation AFTER coding has begun, eg. during the project development phase.
 
