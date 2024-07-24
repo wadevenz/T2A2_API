@@ -32,6 +32,9 @@
 
 Please note: To remove the application from development debug mode, enter .flaskenv file and replace 'FLASK_DEBUG=1' to 'FLASK_DEBUG=0'.
 
+Comments within the applications code adhere to PEP 8 style guidelines.
+van Rossum W, Warsaw B, Coghlan A, 2013, PEP 8 – Style Guide for Python Code, https://peps.python.org/pep-0008/#comments
+
 ### R1 Explain the problem that this app will solve, and explain how this app solves or addresses the problem.
 
 On its face, creating a footy tipping API might appear that it tackles no significant purpose or goal. Instead, it seems to exist merely to make available basic AFL information allow the amusement of friends and colleagues for some light hearted fun and hard but friendly competition through tipping... and that is true. 
