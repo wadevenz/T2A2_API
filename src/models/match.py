@@ -11,9 +11,9 @@ class Match(db.Model):
     __tablename__ = "matches"
 
     id = db.Column(db.Integer, primary_key=True)
-    round = db.Column(db.String)
-    time = db.Column(db.DateTime)
-    winner = db.Column(db.String)
+    round = db.Column(db.String, nullable=False)
+    time = db.Column(db.DateTime, nullable=False)
+    winner = db.Column(db.String, nullable=False)
     
     location_id = db.Column(db.Integer, db.ForeignKey("locations.id"), nullable=False)
     home_team_id = db.Column(db.Integer, db.ForeignKey("teams.id"), nullable=False)

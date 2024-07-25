@@ -10,6 +10,7 @@ from utils import auth_as_admin_decorator
 
 location_bp = Blueprint("locations", __name__, url_prefix="/locations")
 
+# 
 @location_bp.route("/")
 def get_all_locations():
     stmt = db.select(Location)
