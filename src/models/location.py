@@ -8,7 +8,7 @@ class Location(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     city = db.Column(db.String, nullable=False)
-    stadium = db.Column(db.String)
+    stadium = db.Column(db.String, nullable=False)
     timezone = db.Column(db.String)
 
     matches = db.relationship("Match", back_populates="locations")

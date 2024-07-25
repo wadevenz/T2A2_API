@@ -984,7 +984,7 @@ Endpoint to update a specific tip.
 
 **Route or Path** - http://localhost:8080/tips/<int:tip_id>
 
-**Body Required** - (OPtional fields for the PATCH method)
+**Body Required** - (Optional fields for the PATCH method)
 
 selection: One of a valid string selection; "Home" or "Away" 
 
@@ -1044,5 +1044,431 @@ Example: tip_id = 10
 
 ### **Location**
 
+**HTTP Method** - GET
+
+Retrieve all teams from the database. 
+
+**Route or Path** - http://localhost:8080/locations
+
+**Response**
+```
+[
+	{
+		"id": 1,
+		"city": "Brisbane, Queensland",
+		"stadium": "Gabba",
+		"timezone": "Australia/Queensland"
+	},
+	{
+		"id": 2,
+		"city": "Gold Coast, Queensland",
+		"stadium": "People First Stadium",
+		"timezone": "Australia/Queensland"
+	},
+	{
+		"id": 3,
+		"city": "Mount Barker, South Australia",
+		"stadium": "Adelaide Hills",
+		"timezone": "Australia/South"
+	},
+	{
+		"id": 4,
+		"city": "Adelaide, South Australia",
+		"stadium": "Adelaide Oval",
+		"timezone": "Australia/South"
+	},
+	{
+		"id": 5,
+		"city": "Hobart, Tasmaina",
+		"stadium": "Blundstone Arena",
+		"timezone": "Australia/Tasmania"
+	},
+	{
+		"id": 6,
+		"city": "Sydney, New South Wales",
+		"stadium": "ENGIE Stadium",
+		"timezone": "Australia/Sydney"
+	},
+	{
+		"id": 7,
+		"city": "Geelong, Victoria",
+		"stadium": "GMHBA Stadium",
+		"timezone": "Australia/Melbourne"
+	},
+	{
+		"id": 8,
+		"city": "Canberra, Australian Capital Territory",
+		"stadium": "Manuka Oval",
+		"timezone": "Australia/Sydney"
+	},
+	{
+		"id": 9,
+		"city": "Ballarat, Victoria",
+		"stadium": "Mars Stadium",
+		"timezone": "Australia/Victoria"
+	},
+	{
+		"id": 10,
+		"city": "Melbourne, Victoria",
+		"stadium": "Marvel Stadium",
+		"timezone": "Australia/Melbourne"
+	},
+	{
+		"id": 11,
+		"city": "Melbourne, Victoria",
+		"stadium": "MCG",
+		"timezone": "Australia/Melbourne"
+	},
+	{
+		"id": 12,
+		"city": "Norwood, South Australia",
+		"stadium": "Norwood Oval",
+		"timezone": "Australia/South"
+	},
+	{
+		"id": 13,
+		"city": "Perth, Australia",
+		"stadium": "Optus Stadium",
+		"timezone": "Australia/Perth"
+	},
+	{
+		"id": 14,
+		"city": "Sydney, New South Wales",
+		"stadium": "SCG",
+		"timezone": "Australia/Sydney"
+	},
+	{
+		"id": 15,
+		"city": "Darwin, Northern Territory",
+		"stadium": "TIO Stadium",
+		"timezone": "Australia/North"
+	},
+	{
+		"id": 16,
+		"city": "Alice Springs, Northern Territory",
+		"stadium": "TIO Traeger Park",
+		"timezone": "Australia/North"
+	},
+	{
+		"id": 17,
+		"city": "Launceston, Tasmania",
+		"stadium": "UTAS Stadium",
+		"timezone": "Australia/Tasmania"
+	}
+]
+```
+
+**HTTP Method** - GET
+
+Retrieve a single team from the database. 
+
+**Route or Path** - http://localhost:8080/locations/<int:location_id>
+
+**Response**
+
+Example: location_id = 4
+```
+{
+	"id": 4,
+	"city": "Adelaide, South Australia",
+	"stadium": "Adelaide Oval",
+	"timezone": "Australia/South"
+}
+```
+
+**HTTP Method** - POST
+
+Create a new location.
+
+**Route or Path** - http://localhost:8080/locations
+
+**Body Required**
+
+city: A string identifying the city.
+
+stadium: A string to identify the stadium. 
+
+timezone: A string format to identify timezone. 
+
+Example:
+```
+{
+	"city": "Hobart, Tasmania",
+	"stadium": "Macquarie Point Stadium",
+	"timezone": "Australia/Tasmania"
+}
+```
+
+**Header Required**
+
+token: A valid token from an authorised admin user. 
+
+**Response**
+```
+{
+	"id": 18,
+	"city": "Hobart, Tasmania",
+	"stadium": "Macquarie Point Stadium",
+	"timezone": "Australia/Tasmania"
+}
+```
+
+
+**HTTP Method** - PUT, PATCH 
+
+Update an existing location
+
+**Route or Path** - http://localhost:8080/locations/<int:location_id>
+
+**Body Required** - (Optional fields for PATCH method)
+
+city: A string identifying the city.
+
+stadium: A string to identify the stadium. 
+
+timezone: A string format to identify timezone. 
+
+Example:
+```
+{
+	"city": "Hobart, Tasmania",
+	"stadium": "Bellrive Oval",
+	"timezone": "Australia/Tasmania"
+}
+```
+
+**Header Required**
+
+token: A valid token from an authorised admin user. 
+
+**Response**
+```
+{
+	"id": 18,
+	"city": "Hobart, Tasmania",
+	"stadium": "Bellrive Oval",
+	"timezone": "Australia/Tasmania"
+}
+```
+
+**HTTP Method** - DELETE
+
+Delete an existing location from the database. 
+
+**Route or Path** - http://localhost:8080/locations/<int:location_id>
+
+**Header Required**
+
+token: A valid JWT that is associated with an authorised admin. 
+
+**Response**
+
+Example: location_id = 18
+```
+{
+	"message": "Location with id '18' has been deleted"
+}
+```
+
 ### **Teams**
 
+**HTTP Method** - GET
+
+Retrieve all teams from the database. 
+
+**Route or Path** - http://localhost:8080/teams
+
+**Response**
+```
+[
+	{
+		"id": 1,
+		"name": "Brisbane Lions",
+		"stadium": "Gabba"
+	},
+	{
+		"id": 2,
+		"name": "Gold Coast Suns",
+		"stadium": "People First Stadium"
+	},
+	{
+		"id": 3,
+		"name": "Sydney Swans",
+		"stadium": "SCG"
+	},
+	{
+		"id": 4,
+		"name": "GWS Giants",
+		"stadium": "Engie Stadium, Manuka Oval"
+	},
+	{
+		"id": 5,
+		"name": "Carlton Blues",
+		"stadium": "Marvel Stadium"
+	},
+	{
+		"id": 6,
+		"name": "Geelong Cats",
+		"stadium": "GMHBA Stadium"
+	},
+	{
+		"id": 7,
+		"name": "Fremantle Dockers",
+		"stadium": "Optus Stadium"
+	},
+	{
+		"id": 8,
+		"name": "Essendon Bombers",
+		"stadium": "Marvel Stadium"
+	},
+	{
+		"id": 9,
+		"name": "Melbourne Demons",
+		"stadium": "MCG"
+	},
+	{
+		"id": 10,
+		"name": "Port Adelaide Power",
+		"stadium": "Adelaide Oval"
+	},
+	{
+		"id": 11,
+		"name": "Western Bulldogs",
+		"stadium": "Marvel Stadium, Mars Stadium"
+	},
+	{
+		"id": 12,
+		"name": "Hawthorn Hawks",
+		"stadium": "MCG, UTAS Stadium"
+	},
+	{
+		"id": 13,
+		"name": "Adelaide Crows",
+		"stadium": "Adelaide Oval"
+	},
+	{
+		"id": 14,
+		"name": "Collingwood Magpies",
+		"stadium": "MCG"
+	},
+	{
+		"id": 15,
+		"name": "St Kilda",
+		"stadium": "Marvel Stadium"
+	},
+	{
+		"id": 16,
+		"name": "West Coast Eagles",
+		"stadium": "Optus Stadium"
+	},
+	{
+		"id": 17,
+		"name": "North Melbourne Kangaroos",
+		"stadium": "Marvel Stadium, Blundstone Arena"
+	},
+	{
+		"id": 18,
+		"name": "Richmond Tigers",
+		"stadium": "MCG"
+	}
+]
+```
+
+**HTTP Method** - GET
+
+Retrieve a single team from the database. 
+
+**Route or Path** - http://localhost:8080/teams/<int:team_id>
+
+**Response**
+
+Example: team_id = 1
+```
+{
+	"id": 1,
+	"name": "Brisbane Lions",
+	"stadium": "Gabba"
+}
+```
+**HTTP Method** - POST
+
+Create a new team. 
+
+**Route or Path** - http://localhost:8080/teams
+
+**Body Required** 
+
+name: A String with a character limit of 100
+
+stadium: A String to identify the appropriate stadium. 
+
+Example: 
+```
+{
+	"name": "Tasmanian Devils",
+	"stadium": "Macquarie Point"
+}
+```
+
+**Header Required** 
+
+token: A valid JWT associated with an authorised admin user. 
+
+**Response**
+```
+{
+	"id": 19,
+	"name": "Tasmanian Devils",
+	"stadium": "Macquarie Point"
+}
+```
+**HTTP Method** - PUT, PATCH
+
+Create a new team. 
+
+**Route or Path** - http://localhost:8080/teams/<int:team_id>
+
+**Body Required** 
+
+name: A String with a character limit of 100
+
+stadium: A String to identify the appropriate stadium. 
+
+Example: 
+```
+{
+	"name": "Tasmanian Devils",
+	"stadium": "Bellrive Ovalt"
+}
+```
+
+**Header Required** 
+
+token: A valid JWT associated with an authorised admin user. 
+
+**Response**
+```
+{
+	"id": 19,
+	"name": "Tasmanian Devils",
+	"stadium": "Bellrive Ovalt"
+}
+```
+**HTTP Method**- DELETE
+
+Deletes a team from the database. 
+
+**Route or Path** - http://localhost:8080/teams/<int:team_id>
+
+**Header Required**
+
+token: A valid JWT from an authorised admin. 
+
+**Response**
+
+Example: team_id = 19
+```
+{
+	"message": "Team with id '19' has been deleted"
+}
+```
