@@ -193,6 +193,17 @@ Ellingwood J, 2024, What is an ORM? https://www.prisma.io/dataguide/types/relati
 
 ![ERD](/docs/T2A2_ERD.png)
 
+### User Table
+The 'user' table represents a users attributes. The primary key is the serial id, with 4 other attributes. This table has a one-to-many relationship with the 'tip' table which will be discussed further below. 
+
+### Tip Table
+This table represents the tip/s from a user. The serial id is its primary key. This table is necessary as selections or tips directly from a user onto a match would require a many-to-many relationship from user to match. Therfore it was created with seperate many-to-one relationships. The crows foot annotation from the foreign key of 'user_id' to the user table primary key represents that one user may make many tips, however each tip can only belong to a single user. Similarly the foreign key of match_id related to match table primary key represents that each match may be associated with many tips, a single tip can only be placed onto a single match. 
+
+### Match Table
+This table represents matches played with mulitple attributes and multiple relationships. There are 3 foreign keys within this table, location_id; home_team; and away_team. The location_id represents a one-to-many relationship to the 'location' table, where each match is played at one and only one location, where a single location may have many matches played there. The crows foot annotation also displays that while many matches may be played at each location, there may be some locations that have no matches played there. 
+
+### Team Table
+This table simply stores the team data. The primary key is the serial id, and it is related via a one-to-many relationship to 2 seperate foreign keys on the 'match' table, the 'home_team' and 'away_team'. This is because both the home and away teams are stored within the team table. Each team may be associated with many matches, however for each match, either the 'home_team' or 'away_team' can only be associated with one 'team_id', as is depicted in the ERD. 
 
 ## R7 Explain the implemented models and their relationships, including how the relationships aid the database implementation.This should focus on the database implementation AFTER coding has begun, eg. during the project development phase.
 
@@ -210,9 +221,16 @@ class User(db.Model):
 
     tips = db.relationship("Tip", back_populates="users")
 ```
+The above mode represents a User entity as a table named "users". Each attribute is setup as a column within the table in the database.
+- 'id' is set as an integer data type and also designated the primary key.
+- 'name' is set as a string data type, it has a character limit of 100, and it cannot be left without a value.
+- 'email' is also set as a string data type and must not be left empty. It also is stipulated that it must be unique from any other users 'email' stored in the database. 
+- 'password' is also a string data type, and must be given a value. 
+- 'is_admin' is a boolean type and is given a default value of false. 
+
+The users table shares a relationship with the table 'tips'. Using the relationship method in the ORM we identify the model 'Tip" and substantiate the relationship with the "users" table by using "back_populates".
 
 ### Match Model
-
 ```
 class Match(db.Model):
     __tablename__ = "matches"
@@ -232,9 +250,39 @@ class Match(db.Model):
     
     tips = db.relationship("Tip", back_populates="matches")
 ```
+The Match model is represented by the table with the name "matches". It contains the data from each match. The columns within the table are as follows:
+- 'id' is set as an integer type and the primary key. 
+- 'round' is set as a string. This will mostly show numerical characters representing the current round, however it has been set to a string for alternate alpha characters such as "Grand Final"
+- 'time' set to a datetime object and is to represent the time of each match.
+- 'winner' set to a string type, and has a tuple of valid strings to choose from validated within the schema. 
+- 'location_id' an integer type and a foreign key associated to the id of the 'locations' table. As its a foreign key it also must have a value. 
+- 'home_team_id' an integer type and a foreign key associated to the id of the 'teams' table. As its a foreign key it also must have a value. 
+- 'away_team_id' an integer type and a foreign key associated to the id of the 'teams' table. As its a foreign key it also must have a value. 
+
+There are also multiple relationships that need to be created with other tables within the database.
+- 'locations' creates a relationship with the 'Location' model and completes the relationship with back populating the 'matches' table.
+- 'tips' creates a relationship with the 'Tip' model and completes the relationship with back populating the 'matches' table. 
+- 'home_team' and 'away_team' are both foreign keys associated with a single primary key within the 'Team' model. The completion of this relationship will be discussed in the 'Team Model' 
+
+### Team Model
+```
+class Team(db.Model):
+    __tablename__ = "teams"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False, unique=True)
+    stadium = db.Column(db.String)
+
+    matches = relationship('Match', primaryjoin="or_(Team.id==Match.home_team_id, Team.id==Match.away_team_id)", viewonly=True)
+```
+The 'Team' model was created to store team data. Its table was named "teams". The following objects make up its columns.
+- 'id' is the sserial integer which has been assigned the primary key.
+- 'name' is a string type, which cannot be left without a value, and must be unique within the database. 
+- 'stadium' is a string type. 
+
+A slightly more complex approach was required with the relationship to the 'teams' table. As we have two foreign keys associated with a single primary key, a different method was required. Using the match model, the 'primaryjoin' expression was used with an 'or' statement, to create a relationship from the primary key, 'id' from the 'Team' model to either the foreign key 'home_team_id' or 'away_team_id'. The 'viewonly' expression aslo indicates that this is not for persisting in operations but only when loading the objects. 
 
 ### Tip Model
-
 ```
 class Tip(db.Model):
     __tablename__ = "tips"
@@ -248,9 +296,15 @@ class Tip(db.Model):
     users = db.relationship ('User', back_populates = "tips")
     matches = db.relationship ('Match', back_populates = "tips")
 ```
+The model 'Tip' with the table named "tips". This table and its attributes store date from the selections on matches from the user. Its columns are:
+- 'id' a serial integer set as a the primary key.
+- 'selection' simply a string data type, although has been validated within the schema to a tuple of valid strings.
+- 'user_id' is an integer that has been set a foreign key, relating to the primary key of the 'users' table. As a foreign key it cannot be null. 
+- 'match_id' is an integer that has been set a foreign key, relating to the primary key of the 'matches' table. As a foreign key it cannot be null. 
 
-#### Location Model
+As discussed prior both the foreign keys in this table have a created relationship to the primary key in the associated table utilising SQLAlchemy. 
 
+### Location Model
 ```
 class Location(db.Model):
     __tablename__ = "locations"
@@ -262,19 +316,11 @@ class Location(db.Model):
 
     matches = db.relationship("Match", back_populates="locations")
 ```
-
-### Team Model
-
-```
-class Team(db.Model):
-    __tablename__ = "teams"
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False, unique=True)
-    stadium = db.Column(db.String)
-
-    matches = relationship('Match', primaryjoin="or_(Team.id==Match.home_team_id, Team.id==Match.away_team_id)", viewonly=True)
-```
+Finally the 'Location' model with a table named 'locations', stores the data for each location. It has a relationship with the foreign key within the 'matches' table. Its columns are:
+- 'id' is a serial integer that has been set as a primary key. 
+- 'city' is a string that cannot be left null.
+- 'stadium' is a string data type.
+- 'timezone' is a string data type. It is unable to be a datetime object as the package pytz cannot read those objects. 
 
 ## R8 Explain how to use this application’s API endpoints. 
 
@@ -315,6 +361,35 @@ Example:
 ```
 This has returned a new registered user. As can be seen it displays the 'id' as a serial integer, and also displays the default setting for ```is_admin`` which is 'false'.
 
+**Example Error response** 
+
+If attempting to register with an email that already belongs to a user, e.g "dev1@email.com". 
+```
+{
+	"error": "Email address already in use"
+}
+```
+If registering a user leaving a nullable field empty, e.g no email inputted.
+```
+{
+	"error": {
+		"email": [
+			"Missing data for required field."
+		]
+	}
+}
+```
+If attempting to register with a password that doesn't satisfy criteria. e.g "password"
+```
+{
+	"error": {
+		"password": [
+			"Minimum eight characters, at least one letter and one number"
+		]
+	}
+}
+```
+
 ### **HTTP Method** - POST
 
 This endpoint is designed to login a registered user. 
@@ -345,6 +420,15 @@ Example:
 }
 ```
 This has returned a successful login from the user 'admin'. Unlike the above registered user, the result for ```is_admin``` is 'true', and it has also returned a JWT. This JWT is valid for 24hrs and authorises users for specific endpoints below. As this particular token belongs to an admin, authorisation is much broader as will be seen below. 
+
+**Example Error Response**
+
+If login uses the wrong email or password.
+```
+{
+	"error": "Invalid email or password"
+}
+```
 
 ### **HTTP Method** - GET
 
@@ -401,6 +485,15 @@ Example: User from logged in user id "5"
 ```
 Returns a message that the user has been deleted. 
 
+**Example Error Response**
+
+If not user with the id has already been deleted or does not exist.
+```
+{
+	"error": "User not found"
+}
+```
+
 ### **HTTP Method** - PUT, PATCH 
 
 Updates a users details. The user must be logged in as a valid JWT is required. 
@@ -437,6 +530,14 @@ token: The JWT from the logged in user, in this example "Dev 1".
 ```
 Returns all the user fields with the updated fields displaying any new values.
 
+**Example Error Response**
+
+If the user is not found
+```
+{
+	"error": "User does not exist"
+}
+```
 ## **Match**
 
 ### **HTTP Method** - GET
@@ -603,6 +704,8 @@ Retrieves all matches from the database.
 	}
 ]
 ```
+**Example Error Response** 
+
 ### **HTTP Method** - GET
 
 Retrieves a single match from the database.
@@ -632,6 +735,14 @@ Retrieves a single match from the database.
 ```
 This is returned match where the match_id = 1
 
+**Example Error Response**
+
+If using a 'match id' that does not exist.
+```
+{
+	"error": "Match with id 10 not found"
+}
+```
 ### **HTTP Method** - POST
 
 Creates a match for the database. Admin only authorised for action.
@@ -682,6 +793,18 @@ Example:
 		"name": "Melbourne Demons"
 	},
 	"winner": "Upcoming"
+}
+```
+**Example Error Response**
+
+If time inputted incorrectly
+```
+{
+	"error": {
+		"time": [
+			"Not a valid datetime."
+		]
+	}
 }
 ```
 
@@ -741,6 +864,13 @@ token: A JWT is required from a logged in admin.
 	"winner": "Live"
 }
 ```
+**Example Error Response**
+If match id does not exist. 
+```
+{
+	"error": "Match with id '10' does not exist"
+}
+```
 
 ### **HTTP Method** - DELETE
 
@@ -761,6 +891,13 @@ token: A JWT from a logged in admin
 ```
 This is an example return if endpoint was to delete match with id 10.
 
+**Example Error Response**
+If match id does not exist. 
+```
+{
+	"error": "Match with id '10' does not exist"
+}
+```
 ## **Tips**
 
 ### **HTTP Method** - GET
@@ -974,6 +1111,12 @@ token: A valid JWT is required from a user login.
 ```
 An example return from tip_id = 1
 
+**Example Error Response**
+```
+{
+	"error": "Could not locate tip with id 10"
+}
+```
 ### **HTTP Method** - POST
 
 Endpoint to create a tip. 
@@ -1021,6 +1164,14 @@ token: A valid JWT from the logged in user.
 ```
 A return of the created tip. Importantly tips can only be created or updated if the match in which a selection is being made has a "winner" value of "Upcoming" only, or an error will be sent. 
 
+**Example Error Response**
+
+If a tip is attempted to be created when a matches 'winner' value is not 'Upcoming' the following error occurs.
+```
+{
+	"error": "Cannot make a selection on this match"
+}
+```
 ### **HTTP Method** - PUT, PATCH
 
 Endpoint to update a specific tip. 
@@ -1066,6 +1217,21 @@ token: A valid JWT from the logged in user.
 	}
 }
 ```
+
+**Example Error Response**
+
+If the user did not make the selection that is attempting to be updated, the following error is sent.
+```
+{
+	"error": "You did not make this selection"
+}
+```
+Or if the tip id does not exist
+```
+{
+	"error": "The tip with id '10 does  not exist"
+}
+```
 ### **HTTP Method** - DELETE
 
 Delete a users tip from an authorised login
@@ -1080,6 +1246,12 @@ token: A valid JWT from the user corresponding to targeted tip.
 ```
 {
 	"message": "Tip deleted"
+}
+```
+**Example Error Response**
+```
+{
+	"error": "Tip with id '10' does not exist"
 }
 ```
 ## **Location**
@@ -1214,6 +1386,15 @@ Retrieve a single team from the database.
 ```
 Example return where the location_id = 4
 
+**Example Error Response**
+
+If a location with an id not found in the database is attempted to be retrieved. 
+```
+{
+	"error": "Location with id, '20' does not exist"
+}
+```
+
 ### **HTTP Method** - POST
 
 Create a new location.
@@ -1250,8 +1431,6 @@ token: A valid token from an authorised admin user.
 	"timezone": "Australia/Tasmania"
 }
 ```
-
-
 ### **HTTP Method** - PUT, PATCH 
 
 Update an existing location
@@ -1288,7 +1467,12 @@ token: A valid token from an authorised admin user.
 	"timezone": "Australia/Tasmania"
 }
 ```
-
+**Example Error Response**
+```
+{
+	"error": "Location with id '20' does not exist"
+}
+```
 ### **HTTP Method** - DELETE
 
 Delete an existing location from the database. 
@@ -1307,6 +1491,12 @@ token: A valid JWT that is associated with an authorised admin.
 ```
 Example: location_id = 18
 
+**Example Error Response**
+```
+{
+	"error": "Location with id '18' does not exist"
+}
+```
 ## **Teams**
 
 ### **HTTP Method** - GET
@@ -1427,6 +1617,12 @@ Retrieve a single team from the database.
 ```
 Example: team_id = 1
 
+**Example Error Response**
+```
+{
+	"error": "Team with id '20' does not exist"
+}
+```
 ### **HTTP Method** - POST
 
 Create a new team. 
@@ -1491,6 +1687,12 @@ token: A valid JWT associated with an authorised admin user.
 	"stadium": "Bellrive Ovalt"
 }
 ```
+**Example Error Response**
+```
+{
+	"error": "Team with id '20' does not exist"
+}
+```
 ### **HTTP Method**- DELETE
 
 Deletes a team from the database. 
@@ -1508,3 +1710,35 @@ token: A valid JWT from an authorised admin.
 }
 ```
 Example: team_id = 19
+
+**Example Error Response**
+```
+{
+	"error": "Team with id '19' does not exist"
+}
+```
+**Admin Error**
+
+If an endpoint that only allows an authorised admin is attempted the following error is expected:
+```
+{
+	"error": "Only admin can perform this action"
+}
+```
+### Global Error handling
+```
+@app.errorhandler(ValidationError)
+def validation_error(err):
+    return {"error": err.messages}, 400
+```
+```
+@app.errorhandler(400)
+def bad_request(err):
+    return {"error": err.messages}, 400
+``` 
+```
+@app.errorhandler(401)
+def unauthenticated():
+    return {"error": "You are not authenticated"}, 401
+
+```

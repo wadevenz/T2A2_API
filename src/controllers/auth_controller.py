@@ -85,19 +85,22 @@ def get_users():
 # Valid token required from a logged in user.
 @jwt_required()
 def delete_user():
-    # Retrieves the user where the id matches the logged in user via the valid JWT.
-    stmt = db.select(User).filter_by(id=get_jwt_identity())
-    user = db.session.scalar(stmt)
-    if user:
-        # Delete the user.
-        db.session.delete(user)
-        # Commit the session.
-        db.session.commit()
-        # Return a success message
-        return {"message": f"User with id '{user.id}' has been deleted"}
-    else:
-        return {"error": f" User with id '{user.id}'does not exist"}
-        
+    try:
+        # Retrieves the user where the id matches the logged in user via the valid JWT.
+        stmt = db.select(User).filter_by(id=get_jwt_identity())
+        user = db.session.scalar(stmt)
+        if user:
+            # Delete the user.
+            db.session.delete(user)
+            # Commit the session.
+            db.session.commit()
+            # Return a success message
+            return {"message": f"User with id '{user.id}' has been deleted"}
+        else:
+            return {"error": f" User with id '{user.id}'does not exist"}
+    except AttributeError as err:
+        return {"error": "User not found"}, 404
+    
 # Route to update a user.
 @auth_bp.route("/users", methods=["PUT", "PATCH"])
 # Valid token required from a logged in user.

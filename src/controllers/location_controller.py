@@ -30,7 +30,7 @@ def get_location(locations_id):
         return location_schema.dump(location)
     # If no location exists return an error message. 
     else:
-        return {"error": f"Location with id, {locations_id} does not exist"}, 404
+        return {"error": f"Location with id, '{locations_id}' does not exist"}, 404
     
 # Route to create a location.
 @location_bp.route("/", methods=["POST"])
