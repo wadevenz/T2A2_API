@@ -32,9 +32,6 @@
 
 Please note: To remove the application from development debug mode, enter .flaskenv file and replace 'FLASK_DEBUG=1' to 'FLASK_DEBUG=0'.
 
-Comments within the applications code adhere to PEP 8 style guidelines.
-van Rossum W, Warsaw B, Coghlan A, 2013, PEP 8 – Style Guide for Python Code, https://peps.python.org/pep-0008/#comments
-
 ## R1 Explain the problem that this app will solve, and explain how this app solves or addresses the problem.
 
 On its face, creating a footy tipping API might appear that it tackles no significant purpose or goal. Instead, it seems to exist merely to make available basic AFL information allow the amusement of friends and colleagues for some light hearted fun and hard but friendly competition through tipping... and that is true. 
@@ -65,73 +62,103 @@ Significant tasks were also given target completion dates, which highlighted the
 
 ## R3 List and explain the third-party services, packages and dependencies used in this app.
 
-#### Flask
+### Flask
 
 Flask is a Python web applcation Framework that can be used to design API's, hence used in this project. Its popularity stems from its simplicity, versatility and self capability, meaning it has no external requirements and therefore works as an effective framework for this project written in the Python language. 
 
 Python Software Foundation, 2024, PyPi, Flask 3.0.3, https://pypi.org/project/Flask/
 
-#### SQLAlchemy
+### SQLAlchemy
 
-As this application is utilising a relational database management system, PostgreSQL, the Object Relational Mapper and Python toolkit of SQLalchemy allows the relationship structure and schemas of the database to be mapped on to the objects written in Python.
+As this application is utilising a relational database management system, PostgreSQL, the Object Relational Mapper and Python toolkit of SQLalchemy allows the relationship structure and schemas of the database to be mapped effectively on to the objects written in Python.
 
 SQLAlchemy, viewed Jul 2024, https://www.sqlalchemy.org/
 
-#### Psycopg2
+### Psycopg2
 
-Using the Python language, the most common connection to the PostgreSQL databse is via the database adapter of psycopg2. Its versatile and secure and works efficienty to mathc Python data types to PostgreSQL types. 
+Using the Python language, the most common connection to the PostgreSQL database is via the database adapter of psycopg2. Its versatile and secure and works efficienty to match Python data types to PostgreSQL types. 
 
 Python Software Foundation, 2024, pscopg2 2.9.9, https://pypi.org/project/psycopg2/
 
-#### Bcrypt
+### Bcrypt
 
 Bcrypt is a function that utilises cryptographics to hash a password, and then stores it in a back end for the purpose of significantly increasing password protection and data safety. 
 
 Python Software Foundation, 2024, bcrypt 4.2.0, https://pypi.org/project/bcrypt/
 
-#### Marshmallow
+### Marshmallow
 
 Marshmallow is the 'middle-man' Python library, that enables the serialistaion and deserialisation of JSON data in our Flask application. It allows the JSON data types requested and sent from the front end to be read and validated, and manipulated into desired structures or schemas within the application.
 
 Bharathwaj N, 2023, Marshmallow with Python Flask,https://medium.com/@nithinbharathwaj/marshmallow-with-python-flask-263e1fd5911f
 
-#### JWT Manager
+### JWT Manager
 
-Authorisation for interaction with data in this application is mostly using the common JSON Web Tokens. To do this more effectively the Javascript library JWT Mangager was installed.
+Authorisation for interaction with data in this application is achieve using the common JSON Web Tokens. To do this more effectively the Javascript library JWT Mangager was installed.
 
-#### dotenv
+### dotenv
 
-The python-dotenv package allows the program to read ky-value pair variables from ```.env``` files. This has been used to store sensive data contained with the URI and a secret JWT key. 
+The python-dotenv package allows the program to read key-value pair variables from ```.env``` files. This has been used to store sensive data contained with the URI and a secret JWT key. 
 
 Python Software Foundation, 2024, python-dotenv 1.0.1, https://pypi.org/project/python-dotenv/
 
-#### Time/Date/Timezone libraries
+### Time/Date/Timezone libraries
 
-A few modules and libraries have been installed to be able to access the databases and implement certain variables within the application. 
+A few modules and libraries have been installed to be able to access the databases and implement certain time and date variables within the application. 
 
 ## R4 Explain the benefits and drawbacks of this app’s underlying database system.
 
-#### PostgreSQL
-##### Benefits
+### PostgreSQL
 
-##### Drawbacks
+PostgreSQL was the database system used for this application. It is an open source program that operates as an object-relational database management system. As this applications data suits an object structure of tables with columns that maintains relationships with other entities, the feature rich PostgreSQL fulfils the applications requirements well. Below is a brief outline of the database systems advantages and disadvantages. 
+
+#### Benefits
+**Object orientation** - As just mentioned, data stored in table structures with defined attributes and the ability to define comlex data types is a benefit, especially if designing a suitable application. Also within these data relationships is an inheritance structure which is important in object orientation (Ellingwood, 2024). 
+
+**ACID compliance** - ACID refers to standards that are aimed to achieve maximum data validity and integrity when interacting with a database (Elligwood,2024). Its an acronym that can be explained through the folowing values:
+ - **Atomicity** - Refers to indvisible transactions that maintain the function of all operations within that transaction. A transaction should and will not be finalised incomplete. 
+ - **Consistency** - If data transitions through states, then the data integrity will be complete and maintained as it was pre transition. 
+ - **Isolation** - Refers to data integrity being maintained through interactions as if every transaction was executed in sequential order.
+ - **Durability** - Maintains all completed transactions through database failure or error. 
+ 
+(Timescale, 2024)
+
+**Conforms to SQL standards** - Compared to other similar systems, its increased adherence to SQL standards improves implementation of SQL functionality (Ellingwood, 2024)
+
+**Open Source** - PostgreSQL is a popular open source project, which gives the benefit of a range of contrbutions to the development process (Ellingwood, 2024). Howver as seen below, open source may have some disadvantages. 
+
+#### Drawbacks
+
+**Open Source** - This can be a negative due to numerous owners rather than a single driving coorporate entity. Its broad input may have lead to poorer initial distribution and may also need higher clarity to maintain user friendliness. Also unlike other open source competitors PostgreSQL is not supported by as many market platforms and can suffer from compatability issues with some users(Ambarder, 2024). 
+
+**Poor efficiency** - Compared to its closest competitor, the execution of concurrent dependencies can lead to decreased performance, especially if comparing to MySQL (Ambarder, 2024).
+
+Ellingwood J, The benefits of PostgreSQL, viewed 2024 https://www.prisma.io/dataguide/postgresql/benefits-of-postgresql
+
+Timescale, 2024, Understanding PostgreSQL, https://www.timescale.com/learn/understanding-postgresql
+
+Dhruv S, 2024, PostgreSQL Advantages and Disadvantages, https://www.aalpha.net/blog/pros-and-cons-of-using-postgresql-for-application-development/
+
+Ambarder S, 2024, What is PostgreSQL?, https://intellipaat.com/blog/what-is-postgresql/
 
 ## R5 Explain the features, purpose and functionalities of the object-relational mapping system (ORM) used in this app.
 
-#### SQLALChemy
+### SQLALChemy
 
-ORM purpose
+**ORM purpose**
 
+As this application utilises OOP or Object Oriented Programming, a bridge is required from the code of the application to the structure and schema of the database. We need software to act as a layer in between the two to help communicate and create the desired goal, this software is referred to as Object Relational Mapping. As discussed, our database management system is PostgreSQL, and our application is built within a Python framework. A popular and functional ORM for this purpose is SQLAlchemy. Discussed below are some key features and an example of its functionality within the application (Ellingwood, 2024).
 
+**Features**
 
-Features
-- Function-based query construction
-- Seperate mapping and class design
-- Mature high performing architecture
-- Composite primary keys
-- self-referential Object Mappings
+Function-based query construction - A significant feature, especially for this application is to allow functions, objects or expressions in Python language to construct SQL queries, which is important for simple and efficient implementation. 
 
-Functionality
+Seperate mapping and class design - Like other ORMs it allows classes defined by a user to be mapped inline with table data utilising a "'Decalrative' configurational system" (SQLAlchemy,2024). Uniquely however it isolates this functionality into seperate implementations through the use of function.
+
+Other features of SQLAlchemy include representing primary and foreign keys as sets of columns and also including composite primary keys. As well as a mature architecture and self referential object mapping, there is the ability for single and joined table inheritance. SQLAlchemy supports the retrieval of multiple inherited types from a single query
+(SQLAlchemy, 2024)
+
+**Functionality**
 
 An important functional tool in this application is in mapping models for the database. 
 An example of how this mapping is utilised in this app can be seen in the use of classes and subclasses in creating tables with attributes as columns in the database.
@@ -142,18 +169,25 @@ An example of how this mapping is utilised in this app can be seen in the use of
 
     db.init_app(app)
 ```
-First of all the app is created via a "Declarative Base" class and SQLAlchemy is instantiated to be utilised to create the example model below.
+First of all the app is created via a "Declarative Base" class and SQLAlchemy is instantiated to be utilised to create the example model with the table named "teams" as seen below.
 ```
 class Team(db.Model):
     __tablename__ = "teams"
 
     id = db.Column(db.Integer, primary_key=True)
 ```
-The subclass Team can be defined as a Model and declare a tablename which reflects a table in the database. Attributes can then be added declared as a Column as seen above. 
+This subclass Team can also be given attributes states as a column as seen above. 
 
-SQLAlchemy is also used within the app to declare relationships between Models primary and foreign keys. Below shows an example from the Tip model, showing a many to one relationship with the Match model.
+SQLAlchemy is also used within the app to show relationships between Models using primary and foreign keys. Below shows an example from the Tip model, showing a many to one relationship with the Match model.
 
 ```tips = db.relationship("Tip", back_populates="matches")```
+
+Using the tool of SQLAlchemy effectively allows the appropriate translation from the framework of our app to the design and structure of the database in the end to allow us to make effective routes or endpoints to retrieve the data from the front end. 
+
+
+SQLAlchemy, 2024, Features and Philosophy, https://www.sqlalchemy.org/features.html
+
+Ellingwood J, 2024, What is an ORM? https://www.prisma.io/dataguide/types/relational/what-is-an-orm#:~:text=In%20general%2C%20ORMs%20serve%20as,from%20your%20language%20of%20choice.
 
 ## R6 Design an entity relationship diagram (ERD) for this app’s database, and explain how the relations between the diagrammed models will aid the database design. This should focus on the database design BEFORE coding has begun, eg. during the project planning or design phase.
 
@@ -162,7 +196,22 @@ SQLAlchemy is also used within the app to declare relationships between Models p
 
 ## R7 Explain the implemented models and their relationships, including how the relationships aid the database implementation.This should focus on the database implementation AFTER coding has begun, eg. during the project development phase.
 
-#### Match Model
+### User Model
+
+```
+class User(db.Model):
+    __tablename__ = "users"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String, nullable=False, unique=True)
+    password = db.Column(db.String, nullable=False)
+    is_admin = db.Column(db.Boolean, default=False)
+
+    tips = db.relationship("Tip", back_populates="users")
+```
+
+### Match Model
 
 ```
 class Match(db.Model):
@@ -184,7 +233,7 @@ class Match(db.Model):
     tips = db.relationship("Tip", back_populates="matches")
 ```
 
-#### Tip Model
+### Tip Model
 
 ```
 class Tip(db.Model):
@@ -214,7 +263,7 @@ class Location(db.Model):
     matches = db.relationship("Match", back_populates="locations")
 ```
 
-#### Team Model
+### Team Model
 
 ```
 class Team(db.Model):
@@ -227,23 +276,11 @@ class Team(db.Model):
     matches = relationship('Match', primaryjoin="or_(Team.id==Match.home_team_id, Team.id==Match.away_team_id)", viewonly=True)
 ```
 
-#### User Model
-
-```
-class User(db.Model):
-    __tablename__ = "users"
-
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String, nullable=False, unique=True)
-    password = db.Column(db.String, nullable=False)
-    is_admin = db.Column(db.Boolean, default=False)
-
-    tips = db.relationship("Tip", back_populates="users")
-```
-
-
 ## R8 Explain how to use this application’s API endpoints. 
+
+Comments within the applications code adhere to PEP 8 style guidelines.
+van Rossum W, Warsaw B, Coghlan A, 2013, PEP 8 – Style Guide for Python Code, https://peps.python.org/pep-0008/#comments
+
 
 ### **Auth & User**
 
