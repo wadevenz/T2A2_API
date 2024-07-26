@@ -369,7 +369,7 @@ If attempting to register with an email that already belongs to a user, e.g "dev
 	"error": "Email address already in use"
 }
 ```
-If registering a user leaving a nullable field empty, e.g no email inputted.
+If registering a user leaving a mandatory field empty, e.g no email inputted.
 ```
 {
 	"error": {
