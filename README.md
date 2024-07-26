@@ -282,9 +282,9 @@ Comments within the applications code adhere to PEP 8 style guidelines. The comm
 
 van Rossum W, Warsaw B, Coghlan A, 2013, PEP 8 – Style Guide for Python Code, https://peps.python.org/pep-0008/#comments
 
-### **Auth & User**
+## **Auth & User**
 
-**HTTP Method** - POST
+### **HTTP Method** - POST
 
 This endpoint is designed to register a new user. 
 
@@ -315,7 +315,7 @@ Example:
 ```
 This has returned a new registered user. As can be seen it displays the 'id' as a serial integer, and also displays the default setting for ```is_admin`` which is 'false'.
 
-**HTTP Method** - POST
+### **HTTP Method** - POST
 
 This endpoint is designed to login a registered user. 
 
@@ -346,7 +346,7 @@ Example:
 ```
 This has returned a successful login from the user 'admin'. Unlike the above registered user, the result for ```is_admin``` is 'true', and it has also returned a JWT. This JWT is valid for 24hrs and authorises users for specific endpoints below. As this particular token belongs to an admin, authorisation is much broader as will be seen below. 
 
-**HTTP Method** - GET
+### **HTTP Method** - GET
 
 This endpoint is designed to retrieve all users information. Authorised for admin only.
 
@@ -381,7 +381,7 @@ token: The JWT from a logged in admin for authorisation:
 ```
 This has returned all users currently registered in the database. 
 
-**HTTP Method** - DELETE
+### **HTTP Method** - DELETE
 
 Deletes a user. Must give valid JWT, therefore a user may only use this endpoint to delete themselves when logged in. 
 
@@ -401,7 +401,7 @@ Example: User from logged in user id "5"
 ```
 Returns a message that the user has been deleted. 
 
-**HTTP Method** - PUT, PATCH 
+### **HTTP Method** - PUT, PATCH 
 
 Updates a users details. The user must be logged in as a valid JWT is required. 
 
@@ -437,9 +437,9 @@ token: The JWT from the logged in user, in this example "Dev 1".
 ```
 Returns all the user fields with the updated fields displaying any new values.
 
-### **Match**
+## **Match**
 
-**HTTP Method** - GET
+### **HTTP Method** - GET
 
 Retrieves all matches from the database.
 
@@ -603,7 +603,7 @@ Retrieves all matches from the database.
 	}
 ]
 ```
-**HTTP Method** - GET
+### **HTTP Method** - GET
 
 Retrieves a single match from the database.
 
@@ -632,7 +632,7 @@ Retrieves a single match from the database.
 ```
 This is returned match where the match_id = 1
 
-**HTTP Method** - POST
+### **HTTP Method** - POST
 
 Creates a match for the database. Admin only authorised for action.
 
@@ -685,7 +685,7 @@ Example:
 }
 ```
 
-**HTTP Method** - PUT, PATCH
+### **HTTP Method** - PUT, PATCH
 
 Updates a particular match based on the match id in the route. 
 
@@ -742,7 +742,7 @@ token: A JWT is required from a logged in admin.
 }
 ```
 
-**HTTP Method** - DELETE
+### **HTTP Method** - DELETE
 
 Deletes a match based on the id in the route. 
 
@@ -761,9 +761,9 @@ token: A JWT from a logged in admin
 ```
 This is an example return if endpoint was to delete match with id 10.
 
-### **Tips**
+## **Tips**
 
-**HTTP Method** - GET
+### **HTTP Method** - GET
 
 Retrieves all tips from the database. 
 
@@ -941,7 +941,7 @@ token: A valid JWT is required from a user login.
 ]
 ```
 
-**HTTP Method** - GET
+### **HTTP Method** - GET
 
 Retrieves a single tip from the database. 
 
@@ -974,7 +974,7 @@ token: A valid JWT is required from a user login.
 ```
 An example return from tip_id = 1
 
-**HTTP Method** - POST
+### **HTTP Method** - POST
 
 Endpoint to create a tip. 
 
@@ -1021,7 +1021,7 @@ token: A valid JWT from the logged in user.
 ```
 A return of the created tip. Importantly tips can only be created or updated if the match in which a selection is being made has a "winner" value of "Upcoming" only, or an error will be sent. 
 
-**HTTP Method** - PUT, PATCH
+### **HTTP Method** - PUT, PATCH
 
 Endpoint to update a specific tip. 
 
@@ -1066,7 +1066,7 @@ token: A valid JWT from the logged in user.
 	}
 }
 ```
-**HTTP Method** - DELETE
+### **HTTP Method** - DELETE
 
 Delete a users tip from an authorised login
 
@@ -1082,9 +1082,9 @@ token: A valid JWT from the user corresponding to targeted tip.
 	"message": "Tip deleted"
 }
 ```
-### **Location**
+## **Location**
 
-**HTTP Method** - GET
+### **HTTP Method** - GET
 
 Retrieve all teams from the database. 
 
@@ -1197,8 +1197,7 @@ Retrieve all teams from the database.
 	}
 ]
 ```
-
-**HTTP Method** - GET
+### **HTTP Method** - GET
 
 Retrieve a single team from the database. 
 
@@ -1215,7 +1214,7 @@ Retrieve a single team from the database.
 ```
 Example return where the location_id = 4
 
-**HTTP Method** - POST
+### **HTTP Method** - POST
 
 Create a new location.
 
@@ -1253,7 +1252,7 @@ token: A valid token from an authorised admin user.
 ```
 
 
-**HTTP Method** - PUT, PATCH 
+### **HTTP Method** - PUT, PATCH 
 
 Update an existing location
 
@@ -1290,7 +1289,7 @@ token: A valid token from an authorised admin user.
 }
 ```
 
-**HTTP Method** - DELETE
+### **HTTP Method** - DELETE
 
 Delete an existing location from the database. 
 
@@ -1308,9 +1307,9 @@ token: A valid JWT that is associated with an authorised admin.
 ```
 Example: location_id = 18
 
-### **Teams**
+## **Teams**
 
-**HTTP Method** - GET
+### **HTTP Method** - GET
 
 Retrieve all teams from the database. 
 
@@ -1412,7 +1411,7 @@ Retrieve all teams from the database.
 ]
 ```
 
-**HTTP Method** - GET
+### **HTTP Method** - GET
 
 Retrieve a single team from the database. 
 
@@ -1428,7 +1427,7 @@ Retrieve a single team from the database.
 ```
 Example: team_id = 1
 
-**HTTP Method** - POST
+### **HTTP Method** - POST
 
 Create a new team. 
 
@@ -1460,7 +1459,7 @@ token: A valid JWT associated with an authorised admin user.
 	"stadium": "Macquarie Point"
 }
 ```
-**HTTP Method** - PUT, PATCH
+### **HTTP Method** - PUT, PATCH
 
 This endpoint is designed to update a team. 
 
@@ -1492,7 +1491,7 @@ token: A valid JWT associated with an authorised admin user.
 	"stadium": "Bellrive Ovalt"
 }
 ```
-**HTTP Method**- DELETE
+### **HTTP Method**- DELETE
 
 Deletes a team from the database. 
 
