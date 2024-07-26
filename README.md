@@ -278,26 +278,24 @@ class Team(db.Model):
 
 ## R8 Explain how to use this application’s API endpoints. 
 
-Comments within the applications code adhere to PEP 8 style guidelines.
-van Rossum W, Warsaw B, Coghlan A, 2013, PEP 8 – Style Guide for Python Code, https://peps.python.org/pep-0008/#comments
+Comments within the applications code adhere to PEP 8 style guidelines. The comments will give a brief description in the controller about the functionality of each route and when error messages may occur. 
 
+van Rossum W, Warsaw B, Coghlan A, 2013, PEP 8 – Style Guide for Python Code, https://peps.python.org/pep-0008/#comments
 
 ### **Auth & User**
 
 **HTTP Method** - POST
 
-Registering a new user. 
+This endpoint is designed to register a new user. 
 
 **Route or Path** - http://localhost:8080/auth/register
 
 **Body Required**
 
-Default fields: id and a boolean value for is_admin
-
-Required Fields: name, email, password
-
 name: A string of maximum 100 characters
+
 email: Must be in the format of "string"@"string"."string"
+
 password: A string with a minimum of eight characters with at least one Integer and Alpha character. 
 
 Example:
@@ -315,20 +313,21 @@ Example:
 	"is_admin": false
 }
 ```
+This has returned a new registered user. As can be seen it displays the 'id' as a serial integer, and also displays the default setting for ```is_admin`` which is 'false'.
 
 **HTTP Method** - POST
 
-Login a user. 
+This endpoint is designed to login a registered user. 
 
 **Route or Path** - http://localhost:8080/auth/login
 
 **Body Required**
 
-name: The matching string value stored in database
+name: The matching string value for this object stored in the database
 
-email: The matching string value stored in database
+email: The matching string value for this object stored in the database
 
-password: The matching string value stored in database
+password: The matching string value for this object stored in the database
 
 Example:
 ```
@@ -345,10 +344,11 @@ Example:
 	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTcyMTg4MTkwOCwianRpIjoiZDcyMzkxMWUtNzg4NS00YTA4LTliZWYtNjkwODQxZmM0MDAwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3MjE4ODE5MDgsImNzcmYiOiI1MGQzZTFhYi02YmE5LTRkMGQtODI5Zi0zZTVkNTNjZWQxYTciLCJleHAiOjE3MjE5NjgzMDh9.xMgSAY06__87jdpulgJVSdxcZoWjuVeTI2tzrMDjqMw"
 }
 ```
+This has returned a successful login from the user 'admin'. Unlike the above registered user, the result for ```is_admin``` is 'true', and it has also returned a JWT. This JWT is valid for 24hrs and authorises users for specific endpoints below. As this particular token belongs to an admin, authorisation is much broader as will be seen below. 
 
 **HTTP Method** - GET
 
-Retrieve all users information. Authorised for admin only.
+This endpoint is designed to retrieve all users information. Authorised for admin only.
 
 **Route or Path** - http://localhost:8080/auth/users
 
@@ -377,18 +377,13 @@ token: The JWT from a logged in admin for authorisation:
 		"email": "dev1@email.com",
 		"is_admin": false
 	},
-	{
-		"id": 5,
-		"name": "Dev 2",
-		"email": "dev2@email.com",
-		"is_admin": false
-	}
 ]
 ```
+This has returned all users currently registered in the database. 
 
 **HTTP Method** - DELETE
 
-Deletes a user. Must give valid JWT, therefore a user may only delete themselves. 
+Deletes a user. Must give valid JWT, therefore a user may only use this endpoint to delete themselves when logged in. 
 
 **Route or Path** - http://localhost:8080/auth/users
 
@@ -404,6 +399,7 @@ Example: User from logged in user id "5"
 	"message": "User with id '5' has been deleted"
 }
 ```
+Returns a message that the user has been deleted. 
 
 **HTTP Method** - PUT, PATCH 
 
@@ -439,6 +435,7 @@ token: The JWT from the logged in user, in this example "Dev 1".
 	"is_admin": false
 }
 ```
+Returns all the user fields with the updated fields displaying any new values.
 
 ### **Match**
 
@@ -608,13 +605,12 @@ Retrieves all matches from the database.
 ```
 **HTTP Method** - GET
 
-Retrieves a match from the database.
+Retrieves a single match from the database.
 
 **Route or Path** - http://localhost:8080/matches/<int:match_id>
 
 **Response**
 
-Example: match_id=1
 ```
 {
 	"id": 1,
@@ -634,6 +630,7 @@ Example: match_id=1
 	"winner": "Upcoming"
 }
 ```
+This is returned match where the match_id = 1
 
 **HTTP Method** - POST
 
@@ -670,12 +667,21 @@ Example:
 **Response**
 ```
 {
+	"id": 10,
 	"round": "21",
 	"time": "2024-08-02 19:15",
-	"winner": "Upcoming",
-	"location_id": "10",
-	"home_team_id": "11",
-	"away_team_id": "9"
+	"locations": {
+		"city": "Melbourne, Victoria",
+		"stadium": "Marvel Stadium",
+		"timezone": "Australia/Melbourne"
+	},
+	"home_team": {
+		"name": "Western Bulldogs"
+	},
+	"away_team": {
+		"name": "Melbourne Demons"
+	},
+	"winner": "Upcoming"
 }
 ```
 
@@ -748,12 +754,12 @@ token: A JWT from a logged in admin
 
 **Response**
 
-Example: match_id = 10
 ```
 {
 	"message": "Match with id '10' has been deleted"
 }
 ```
+This is an example return if endpoint was to delete match with id 10.
 
 ### **Tips**
 
@@ -946,8 +952,6 @@ Retrieves a single tip from the database.
 token: A valid JWT is required from a user login. 
 
 **Response** 
-
-Example: tip_id = 1
 ```
 {
 	"id": 1,
@@ -968,6 +972,7 @@ Example: tip_id = 1
 	}
 }
 ```
+An example return from tip_id = 1
 
 **HTTP Method** - POST
 
@@ -1014,6 +1019,7 @@ token: A valid JWT from the logged in user.
 	}
 }
 ```
+A return of the created tip. Importantly tips can only be created or updated if the match in which a selection is being made has a "winner" value of "Upcoming" only, or an error will be sent. 
 
 **HTTP Method** - PUT, PATCH
 
@@ -1071,14 +1077,11 @@ Delete a users tip from an authorised login
 token: A valid JWT from the user corresponding to targeted tip. 
 
 **Response**
-
-Example: tip_id = 10
 ```
 {
 	"message": "Tip deleted"
 }
 ```
-
 ### **Location**
 
 **HTTP Method** - GET
@@ -1202,8 +1205,6 @@ Retrieve a single team from the database.
 **Route or Path** - http://localhost:8080/locations/<int:location_id>
 
 **Response**
-
-Example: location_id = 4
 ```
 {
 	"id": 4,
@@ -1212,6 +1213,7 @@ Example: location_id = 4
 	"timezone": "Australia/South"
 }
 ```
+Example return where the location_id = 4
 
 **HTTP Method** - POST
 
@@ -1299,13 +1301,12 @@ Delete an existing location from the database.
 token: A valid JWT that is associated with an authorised admin. 
 
 **Response**
-
-Example: location_id = 18
 ```
 {
 	"message": "Location with id '18' has been deleted"
 }
 ```
+Example: location_id = 18
 
 ### **Teams**
 
@@ -1418,8 +1419,6 @@ Retrieve a single team from the database.
 **Route or Path** - http://localhost:8080/teams/<int:team_id>
 
 **Response**
-
-Example: team_id = 1
 ```
 {
 	"id": 1,
@@ -1427,6 +1426,8 @@ Example: team_id = 1
 	"stadium": "Gabba"
 }
 ```
+Example: team_id = 1
+
 **HTTP Method** - POST
 
 Create a new team. 
@@ -1461,7 +1462,7 @@ token: A valid JWT associated with an authorised admin user.
 ```
 **HTTP Method** - PUT, PATCH
 
-Create a new team. 
+This endpoint is designed to update a team. 
 
 **Route or Path** - http://localhost:8080/teams/<int:team_id>
 
@@ -1502,10 +1503,9 @@ Deletes a team from the database.
 token: A valid JWT from an authorised admin. 
 
 **Response**
-
-Example: team_id = 19
 ```
 {
 	"message": "Team with id '19' has been deleted"
 }
 ```
+Example: team_id = 19
