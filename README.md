@@ -104,7 +104,7 @@ Python Software Foundation, 2024, python-dotenv 1.0.1, https://pypi.org/project/
 
 ### Time/Date/Timezone libraries
 
-A few modules and libraries have been installed to be able to access the databases and implement certain time and date variables within the application. 
+A few modules and libraries have been installed to be able to access the databases and implement certain time and date variables within the application. These packages include; datetime, ZoneInfo and pytz.
 
 ## R4 Explain the benefits and drawbacks of this app’s underlying database system.
 
