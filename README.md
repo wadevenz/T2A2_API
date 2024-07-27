@@ -373,7 +373,7 @@ Example:
 ```
 This has returned a new registered user. As can be seen it displays the 'id' as a serial integer, and also displays the default setting for ```is_admin`` which is 'false'.
 
-**Example Error response** 
+**Example Error Response** 
 
 If attempting to register with an email that already belongs to a user, e.g "dev1@email.com". 
 ```
