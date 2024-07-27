@@ -52,7 +52,7 @@ Barrett, S, 2018, Is footy tipping the missing link for a great company culture?
 
 [Trello](https://trello.com/b/vHCD0owm/t2a2api)
 
-The planning and project allocation tool I used for this application was trello. The software provides templates with which gives a good indication of desirable workflow.
+The planning and project allocation tool I used for this application was Trello. The software provides templates with which gives a good indication of desirable workflow.
 
 Tasks are split up into 5 cards; Brainstorm, Todo, Doing and Done. As this was a similar task to undertake as had been previously seen, most tasks were automatically assigned to the 'Todo' card at the beginning. However as this was a first time solo project of this nature, inevitably other tasks were assigned as they were presented along the timeline of the project.
 
@@ -164,7 +164,7 @@ As this application utilises OOP or Object Oriented Programming, and our databas
 
 Function-based query construction - A significant feature, especially for this application is to allow functions, objects or expressions in Python language to construct SQL queries, which is important for simple and efficient implementation. 
 
-Seperate mapping and class design - Like other ORMs it allows classes defined by a user to be mapped inline with table data utilising a "'Decalrative' configurational system" (SQLAlchemy,2024). Uniquely however it isolates this functionality into seperate implementations through the use of a function.
+Seperate mapping and class design - Like other ORMs it allows classes defined by a user to be mapped inline with table data utilising a "Declarative' configurational system" (SQLAlchemy,2024). Uniquely however it isolates this functionality into seperate implementations through the use of a function.
 
 Other features of SQLAlchemy include representing primary and foreign keys as sets of columns and also including composite primary keys. As well as a mature architecture and self referential object mapping, there is the ability for single and joined table inheritance. SQLAlchemy supports the retrieval of multiple inherited types from a single query. 
 (SQLAlchemy, 2024)
@@ -233,7 +233,7 @@ class User(db.Model):
 
     tips = db.relationship("Tip", back_populates="users")
 ```
-The above mode represents a User entity as a table named "users". Each attribute is setup as a column within the table in the database.
+The above model represents a User entity as a table named "users". Each attribute is setup as a column within the table in the database.
 - 'id' is set as an integer data type and also designated the primary key.
 - 'name' is set as a string data type, it has a character limit of 100, and it cannot be left without a value.
 - 'email' is also set as a string data type and must not be left empty. It also is stipulated that it must be unique from any other users 'email' stored in the database. 
@@ -288,11 +288,11 @@ class Team(db.Model):
     matches = relationship('Match', primaryjoin="or_(Team.id==Match.home_team_id, Team.id==Match.away_team_id)", viewonly=True)
 ```
 The 'Team' model was created to store team data. Its table was named "teams". The following objects make up its columns.
-- 'id' is the sserial integer which has been assigned the primary key.
+- 'id' is the serial integer which has been assigned the primary key.
 - 'name' is a string type, which cannot be left without a value, and must be unique within the database. 
 - 'stadium' is a string type. 
 
-A slightly more complex approach was required with the relationship to the 'teams' table. As we have two foreign keys associated with a single primary key, a different method was required. Using the match model, the 'primaryjoin' expression was used with an 'or' statement, to create a relationship from the primary key, 'id' from the 'Team' model to either the foreign key 'home_team_id' or 'away_team_id'. The 'viewonly' expression aslo indicates that this is not for persisting in operations but only when loading the objects. 
+A slightly more complex approach was required with the relationship to the 'teams' table. As we have two foreign keys associated with a single primary key, a different method was required. Using the match model, the 'primaryjoin' expression was used with an 'or' statement, to create a relationship from the primary key 'id' from the 'Team' model to either the foreign key 'home_team_id' or 'away_team_id'. The 'viewonly' expression aslo indicates that this is not for persisting in operations but only when loading the objects. 
 
 ### Tip Model
 ```
@@ -336,7 +336,7 @@ Finally the 'Location' model with a table named 'locations', stores the data for
 
 ## R8 Explain how to use this application’s API endpoints. 
 
-Comments within the applications code adhere to PEP 8 style guidelines. The comments will give a brief description in the controller about the functionality of each route and when error messages may occur. 
+Comments within the applications code adhere to PEP 8 style guidelines. The comments will give a brief description in the controllers about the functionality of each route and when error messages may occur. 
 
 van Rossum W, Warsaw B, Coghlan A, 2013, PEP 8 – Style Guide for Python Code, https://peps.python.org/pep-0008/#comments
 
@@ -414,7 +414,7 @@ name: The matching string value for this object stored in the database
 
 email: The matching string value for this object stored in the database
 
-password: The matching string value for this object stored in the database
+password: The matching string value for this object stored in the database after it has been hashed using a hash method.
 
 Example:
 ```
@@ -479,7 +479,7 @@ This has returned all users currently registered in the database.
 
 ### **HTTP Method** - DELETE
 
-Deletes a user. Must give valid JWT, therefore a user may only use this endpoint to delete themselves when logged in. 
+Deletes a user. Must give a valid JWT, therefore a user may only use this endpoint to delete themselves when logged in. 
 
 **Route or Path** - http://localhost:8080/auth/users
 
@@ -499,7 +499,7 @@ Returns a message that the user has been deleted.
 
 **Example Error Response**
 
-If not user with the id has already been deleted or does not exist.
+If user with the id has already been deleted or does not exist.
 ```
 {
 	"error": "User not found"
@@ -518,7 +518,7 @@ name: The matching string value stored in database
 
 email: The matching string value stored in database
 
-password: The matching string value stored in database
+password: The matching string value for this object stored in the database after it has been hashed using a hash method.
 
 ```
 {
@@ -716,7 +716,6 @@ Retrieves all matches from the database.
 	}
 ]
 ```
-**Example Error Response** 
 
 ### **HTTP Method** - GET
 
@@ -819,7 +818,16 @@ If time inputted incorrectly
 	}
 }
 ```
-
+If a winner is not inputted using the valid selections
+```
+{
+	"error": {
+		"winner": [
+			"Must be one of: Home, Away, Draw, Upcoming, Live."
+		]
+	}
+}
+```
 ### **HTTP Method** - PUT, PATCH
 
 Updates a particular match based on the match id in the route. 
@@ -1089,7 +1097,6 @@ token: A valid JWT is required from a user login.
 	}
 ]
 ```
-
 ### **HTTP Method** - GET
 
 Retrieves a single tip from the database. 
@@ -1184,6 +1191,16 @@ If a tip is attempted to be created when a matches 'winner' value is not 'Upcomi
 	"error": "Cannot make a selection on this match"
 }
 ```
+If not selection is not of the valid selections. 
+```
+{
+	"error": {
+		"selection": [
+			"Must be one of: Home, Away."
+		]
+	}
+}
+```
 ### **HTTP Method** - PUT, PATCH
 
 Endpoint to update a specific tip. 
@@ -1270,7 +1287,7 @@ token: A valid JWT from the user corresponding to targeted tip.
 
 ### **HTTP Method** - GET
 
-Retrieve all teams from the database. 
+Retrieve all locations from the database. 
 
 **Route or Path** - http://localhost:8080/locations
 
@@ -1383,7 +1400,7 @@ Retrieve all teams from the database.
 ```
 ### **HTTP Method** - GET
 
-Retrieve a single team from the database. 
+Retrieve a single location from the database. 
 
 **Route or Path** - http://localhost:8080/locations/<int:location_id>
 
