@@ -34,7 +34,7 @@ Please note: To remove the application from development debug mode, enter .flask
 
 ## R1 Explain the problem that this app will solve, and explain how this app solves or addresses the problem.
 
-On its face, creating a footy tipping API might appear that it tackles no significant purpose or goal. Instead, it seems to exist merely to make available basic AFL information allow the amusement of friends and colleagues for some light hearted fun and hard but friendly competition through tipping... and that is true. 
+On its face, creating a footy tipping API might appear that it tackles no significant purpose or goal. Instead, it seems to exist merely to make available basic AFL information and allow the amusement of friends and colleagues for some light hearted fun and hard but friendly competition... and that is true. 
 
 However, there is much to be said for the benefits of an easy-to-use, enjoyable tipping competition, especially in a safe and friendly environment where no money is exchanged. It enhances engagement with sport, encouraging even the most casual of fans to follow matches closely and discuss predictions with friends and colleagues. 
 
@@ -42,7 +42,9 @@ It fosters camaraderie and friendly competition among participants, leading to s
 
 I have utilised such applications in the past, and I have enjoyed the friendly competition it creates, as it enhances the thrill of the match and creates lively conversations amongst pals. And it appears I'm not alone, as Barrett disccusses that a friendly tipping competition can engage inclusivity and foster communication in the workplace (Barrett, 2018).
 
-Therefore the simple objectiove of this API application is to give AFL fans access to a live database of basic AFL information, including teams, locations, matches and give the option to make selections on the team they believe will win in upcoming matches. Simple in theory, effective in practice. Users have limited ability to manipulate data in the database as most requests are for admin authorisation only. This simplifies the application to give users access to information and the ability to make and update selections. And yet while it may seem that without reward or fincancial incentive, the selection process appears redundant, the reward is the enhanced thrill of following your chosen selection and the competitve incentive to beat your fellow associates. 
+Therefore the simple objective of this API application is to give AFL fans access to a live database of basic AFL information, including teams, locations, matches and give the option to make selections on the team they believe will win in upcoming matches. Simple in theory, and practice. Users have limited ability to manipulate data in the database as most requests are for admin authorisation only. This simplifies the application to give users access to information and the ability to make and update selections. And yet while it may seem that without reward or fincancial incentive the selection process appears redundant, the reward is the enhanced thrill of following your chosen selection and the competitve incentive to beat your fellow associates. 
+
+### References
 
 Barrett, S, 2018, Is footy tipping the missing link for a great company culture?, viewed Jul, 2024, https://www.linkedin.com/pulse/footy-tipping-missing-link-great-company-culture-scott-barrett/
 
@@ -56,7 +58,7 @@ Tasks are split up into 5 cards; Brainstorm, Todo, Doing and Done. As this was a
 
 If the task was large enough, sub tasks were added within them in the form of checklists. This enabled effective breakdown of tasks and also mitigated the risk of leaving some tasks undone. 
 
-Significant tasks were also given target completion dates, which highlighted their importance and enabled better planning. 
+Significant tasks were also given target completion dates, which highlighted their importance and enabled better planning. Tasks were then moved along the chain of process as each task moved along in achievement. 
 
 ![Trello](/docs/T2A2_Trello.png)
 
@@ -65,32 +67,27 @@ Significant tasks were also given target completion dates, which highlighted the
 ### Flask
 
 Flask is a Python web applcation Framework that can be used to design API's, hence used in this project. Its popularity stems from its simplicity, versatility and self capability, meaning it has no external requirements and therefore works as an effective framework for this project written in the Python language. 
-
-Python Software Foundation, 2024, PyPi, Flask 3.0.3, https://pypi.org/project/Flask/
+(Python Software Foundation, 2024)
 
 ### SQLAlchemy
 
 As this application is utilising a relational database management system, PostgreSQL, the Object Relational Mapper and Python toolkit of SQLalchemy allows the relationship structure and schemas of the database to be mapped effectively on to the objects written in Python.
-
-SQLAlchemy, viewed Jul 2024, https://www.sqlalchemy.org/
+(SQLAlchemy, 2024)
 
 ### Psycopg2
 
-Using the Python language, the most common connection to the PostgreSQL database is via the database adapter of psycopg2. Its versatile and secure and works efficienty to match Python data types to PostgreSQL types. 
-
-Python Software Foundation, 2024, pscopg2 2.9.9, https://pypi.org/project/psycopg2/
+Using the Python language, the most common connection to the PostgreSQL database is via the database adapter of psycopg2. Its versatile, secure and works efficienty to match Python data types to PostgreSQL types. 
+(Python Software Foundation, 2024)
 
 ### Bcrypt
 
-Bcrypt is a function that utilises cryptographics to hash a password, and then stores it in a back end for the purpose of significantly increasing password protection and data safety. 
-
-Python Software Foundation, 2024, bcrypt 4.2.0, https://pypi.org/project/bcrypt/
+Bcrypt is a function that utilises cryptographics to hash a password, and then stores it in the back end for the purpose of significantly increasing password protection and data safety. 
+(Python Software Foundation, 2024)
 
 ### Marshmallow
 
 Marshmallow is the 'middle-man' Python library, that enables the serialistaion and deserialisation of JSON data in our Flask application. It allows the JSON data types requested and sent from the front end to be read and validated, and manipulated into desired structures or schemas within the application.
-
-Bharathwaj N, 2023, Marshmallow with Python Flask,https://medium.com/@nithinbharathwaj/marshmallow-with-python-flask-263e1fd5911f
+(Bharathwaj, 2023)
 
 ### JWT Manager
 
@@ -99,39 +96,53 @@ Authorisation for interaction with data in this application is achieve using the
 ### dotenv
 
 The python-dotenv package allows the program to read key-value pair variables from ```.env``` files. This has been used to store sensive data contained with the URI and a secret JWT key. 
+(Python Software Foundation, 2024)
 
-Python Software Foundation, 2024, python-dotenv 1.0.1, https://pypi.org/project/python-dotenv/
 
 ### Time/Date/Timezone libraries
 
 A few modules and libraries have been installed to be able to access the databases and implement certain time and date variables within the application. These packages include; datetime, ZoneInfo and pytz.
 
-## R4 Explain the benefits and drawbacks of this app’s underlying database system.
+### References
 
-### PostgreSQL
+Python Software Foundation, 2024, PyPi, Flask 3.0.3, https://pypi.org/project/Flask/
+
+SQLAlchemy, viewed Jul 2024, https://www.sqlalchemy.org/
+
+Python Software Foundation, 2024, pscopg2 2.9.9, https://pypi.org/project/psycopg2/
+
+Python Software Foundation, 2024, bcrypt 4.2.0, https://pypi.org/project/bcrypt/
+
+Bharathwaj N, 2023, Marshmallow with Python Flask,https://medium.com/@nithinbharathwaj/marshmallow-with-python-flask-263e1fd5911f
+
+Python Software Foundation, 2024, python-dotenv 1.0.1, https://pypi.org/project/python-dotenv/
+
+## R4 Explain the benefits and drawbacks of this app’s underlying database system.
 
 PostgreSQL was the database system used for this application. It is an open source program that operates as an object-relational database management system. As this applications data suits an object structure of tables with columns that maintains relationships with other entities, the feature rich PostgreSQL fulfils the applications requirements well. Below is a brief outline of the database systems advantages and disadvantages. 
 
-#### Benefits
+### Benefits
 **Object orientation** - As just mentioned, data stored in table structures with defined attributes and the ability to define comlex data types is a benefit, especially if designing a suitable application. Also within these data relationships is an inheritance structure which is important in object orientation (Ellingwood, 2024). 
 
-**ACID compliance** - ACID refers to standards that are aimed to achieve maximum data validity and integrity when interacting with a database (Elligwood,2024). Its an acronym that can be explained through the folowing values:
+**ACID compliance** - ACID refers to standards that are aimed to achieve maximum data validity and integrity when interacting with a database (Elligwood,2024). Its an acronym that can be explained through the following values:
  - **Atomicity** - Refers to indvisible transactions that maintain the function of all operations within that transaction. A transaction should and will not be finalised incomplete. 
  - **Consistency** - If data transitions through states, then the data integrity will be complete and maintained as it was pre transition. 
  - **Isolation** - Refers to data integrity being maintained through interactions as if every transaction was executed in sequential order.
- - **Durability** - Maintains all completed transactions through database failure or error. 
- 
+ - **Durability** - Maintains and persists changes of all completed transactions through database failure or error. 
+
 (Timescale, 2024)
 
 **Conforms to SQL standards** - Compared to other similar systems, its increased adherence to SQL standards improves implementation of SQL functionality (Ellingwood, 2024)
 
-**Open Source** - PostgreSQL is a popular open source project, which gives the benefit of a range of contrbutions to the development process (Ellingwood, 2024). Howver as seen below, open source may have some disadvantages. 
+**Open Source** - PostgreSQL is a popular open source project, which gives the benefit of a range of contrbutions to the development process (Ellingwood, 2024). However as seen below, open source may have some disadvantages. 
 
-#### Drawbacks
+### Drawbacks
 
-**Open Source** - This can be a negative due to numerous owners rather than a single driving coorporate entity. Its broad input may have lead to poorer initial distribution and may also need higher clarity to maintain user friendliness. Also unlike other open source competitors PostgreSQL is not supported by as many market platforms and can suffer from compatability issues with some users(Ambarder, 2024). 
+**Open Source** - This can be a negative due to numerous owners rather than a single driving coorporate entity. Its broad input may have lead to poorer initial distribution and may also need higher clarity to maintain user friendliness. Also unlike other open source competitors, PostgreSQL is not supported by as many market platforms and can suffer from compatability issues with some users (Ambarder, 2024). 
 
 **Poor efficiency** - Compared to its closest competitor, the execution of concurrent dependencies can lead to decreased performance, especially if comparing to MySQL (Ambarder, 2024).
+
+### Refereneces
 
 Ellingwood J, The benefits of PostgreSQL, viewed 2024 https://www.prisma.io/dataguide/postgresql/benefits-of-postgresql
 
@@ -147,15 +158,15 @@ Ambarder S, 2024, What is PostgreSQL?, https://intellipaat.com/blog/what-is-post
 
 **ORM purpose**
 
-As this application utilises OOP or Object Oriented Programming, a bridge is required from the code of the application to the structure and schema of the database. We need software to act as a layer in between the two to help communicate and create the desired goal, this software is referred to as Object Relational Mapping. As discussed, our database management system is PostgreSQL, and our application is built within a Python framework. A popular and functional ORM for this purpose is SQLAlchemy. Discussed below are some key features and an example of its functionality within the application (Ellingwood, 2024).
+As this application utilises OOP or Object Oriented Programming, and our database is a relational management system in SQL, a bridge is required from the code of the application to the structure and schema of the database. We need software to act as a layer in between the two to help communicate and create the desired goal, this software is referred to as Object Relational Mapping. As discussed, our database management system is PostgreSQL, and our application is built within a Python framework. A popular and functional ORM for this purpose is SQLAlchemy. Discussed below are some key features and an example of its functionality within the application (Ellingwood, 2024).
 
 **Features**
 
 Function-based query construction - A significant feature, especially for this application is to allow functions, objects or expressions in Python language to construct SQL queries, which is important for simple and efficient implementation. 
 
-Seperate mapping and class design - Like other ORMs it allows classes defined by a user to be mapped inline with table data utilising a "'Decalrative' configurational system" (SQLAlchemy,2024). Uniquely however it isolates this functionality into seperate implementations through the use of function.
+Seperate mapping and class design - Like other ORMs it allows classes defined by a user to be mapped inline with table data utilising a "'Decalrative' configurational system" (SQLAlchemy,2024). Uniquely however it isolates this functionality into seperate implementations through the use of a function.
 
-Other features of SQLAlchemy include representing primary and foreign keys as sets of columns and also including composite primary keys. As well as a mature architecture and self referential object mapping, there is the ability for single and joined table inheritance. SQLAlchemy supports the retrieval of multiple inherited types from a single query
+Other features of SQLAlchemy include representing primary and foreign keys as sets of columns and also including composite primary keys. As well as a mature architecture and self referential object mapping, there is the ability for single and joined table inheritance. SQLAlchemy supports the retrieval of multiple inherited types from a single query. 
 (SQLAlchemy, 2024)
 
 **Functionality**
@@ -169,7 +180,7 @@ An example of how this mapping is utilised in this app can be seen in the use of
 
     db.init_app(app)
 ```
-First of all the app is created via a "Declarative Base" class and SQLAlchemy is instantiated to be utilised to create the example model with the table named "teams" as seen below.
+First of all the app is created via a "Declarative Base" class and SQLAlchemy is initialiased as the 'Flask' application. This is then use to cfreate subclasses as tables, below is an example with the table name "teams". 
 ```
 class Team(db.Model):
     __tablename__ = "teams"
@@ -178,12 +189,13 @@ class Team(db.Model):
 ```
 This subclass Team can also be given attributes states as a column as seen above. 
 
-SQLAlchemy is also used within the app to show relationships between Models using primary and foreign keys. Below shows an example from the Tip model, showing a many to one relationship with the Match model.
+SQLAlchemy is also used within the app to show relationships between Models using primary and foreign keys. Below shows an example from the Tip model, showing a many-to-one relationship with the Match entity.
 
 ```tips = db.relationship("Tip", back_populates="matches")```
 
 Using the tool of SQLAlchemy effectively allows the appropriate translation from the framework of our app to the design and structure of the database in the end to allow us to make effective routes or endpoints to retrieve the data from the front end. 
 
+### References
 
 SQLAlchemy, 2024, Features and Philosophy, https://www.sqlalchemy.org/features.html
 
@@ -197,7 +209,7 @@ Ellingwood J, 2024, What is an ORM? https://www.prisma.io/dataguide/types/relati
 The 'user' table represents a users attributes. The primary key is the serial id, with 4 other attributes. This table has a one-to-many relationship with the 'tip' table which will be discussed further below. 
 
 ### Tip Table
-This table represents the tip/s from a user. The serial id is its primary key. This table is necessary as selections or tips directly from a user onto a match would require a many-to-many relationship from user to match. Therfore it was created with seperate many-to-one relationships. The crows foot annotation from the foreign key of 'user_id' to the user table primary key represents that one user may make many tips, however each tip can only belong to a single user. Similarly the foreign key of match_id related to match table primary key represents that each match may be associated with many tips, a single tip can only be placed onto a single match. 
+This table represents the tip/s from a user. The serial id is its primary key. This table is necessary as selections or tips directly from a user onto a match would require a many-to-many relationship from user to match. Therefore it was created with seperate many-to-one relationships. The crows foot annotation from the foreign key of 'user_id' to the user table primary key represents that one user may make many tips, however each tip can only belong to a single user. Similarly the foreign key of match_id related to match table primary key represents that each match may be associated with many tips, but a single tip can only be placed onto a single match. 
 
 ### Match Table
 This table represents matches played with mulitple attributes and multiple relationships. There are 3 foreign keys within this table, location_id; home_team; and away_team. The location_id represents a one-to-many relationship to the 'location' table, where each match is played at one and only one location, where a single location may have many matches played there. The crows foot annotation also displays that while many matches may be played at each location, there may be some locations that have no matches played there. 
